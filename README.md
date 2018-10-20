@@ -27,4 +27,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Travis status
-![Build status] (https://travis-ci.org/ioioiolab2018/SZBD-Angular.svg?branch=master)
+[![Build Status](https://travis-ci.org/ioioiolab2018/SZBD-Angular.svg?branch=master)](https://travis-ci.org/ioioiolab2018/SZBD-Angular)
