@@ -12,3 +12,9 @@ before_script:
 
 script:
     - ng build --prod
+
+deploy:
+    provider: firebase
+    token:
+        secure: "1/obn4nXvw6rHhrPKWq5Lda0r8BGXegXtk4vDYQTPt2UA"
+    project: "szbd-angular"
