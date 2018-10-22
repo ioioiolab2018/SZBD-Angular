@@ -28,3 +28,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Travis status
 [![Build Status](https://travis-ci.org/ioioiolab2018/SZBD-Angular.svg?branch=master)](https://travis-ci.org/ioioiolab2018/SZBD-Angular)
+
