@@ -10,48 +10,6 @@ $menu-option: rgba(255, 255, 255, 0.75);
     display: grid;
     grid-template-columns: 400px 1fr;
 
-    nav.menu {
-        background-image: linear-gradient(to left bottom, #191E27, #2F3D43);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-family: Montserrat, Arial, Helvetica, sans-serif;
-        color: $menu-option;
-
-        img {
-            width: 130px;
-            margin: 45px auto 55px;
-        }
-
-        h1 {
-            font-size: 30px;
-            font-weight: 700;
-            margin-bottom: 60px;
-        }
-
-        ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            li {
-                margin-bottom: 20px;
-
-                &:nth-last-of-type(1) {
-                    margin-top: 10px;
-                }
-
-                a {
-                    color: $menu-option;
-                    font-size: 25px;
-                    font-weight: 600;
-                    text-decoration: none;
-                }
-            }
-        }
-    }
-
     main {
         display: flex;
         flex-direction: column;

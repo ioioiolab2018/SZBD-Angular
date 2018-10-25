@@ -1,0 +1,22 @@
+@import "variables";
+
+header.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(to left bottom, $gradient-1, $gradient-2);
+    color: $menu-option;
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+
+    img {
+        width: 130px;
+        margin: 45px auto 55px;
+    }
+
+    h1 {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 60px;
+    }
+}

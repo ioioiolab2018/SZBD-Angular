@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { LoginPanelModule } from './login-panel/login-panel.module';
-import { StudentPanelModule } from './student-panel/student-panel.module';
+import { LoginPanelModule } from './forms/login-panel/login-panel.module';
+import { StudentPanelModule } from './forms/student-panel/student-panel.module';
 
 const appRoutes: Routes = [
     {
