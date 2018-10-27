@@ -124,6 +124,52 @@ $input-text: rgb(90, 90, 90);
         }
     }
 }
+@media (max-width: 650px) {
+    .wrapper {
+        .form-container {
+            width: 100%;
+            & > div {
+                min-width: 80%;
+                transform: translateY(-5%);
+            }
+            form {
+                .input {
+                    width: 100%;
+                    input[type='text'],
+                    input[type='password'] {
+                        font-size: 15px;
+                    }
+                }
+                .submit {
+                    input[type='submit'] {
+                        width: 100%;
+                        font-size: 20px;
+                    }
+                    h2 {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 650px) {
+    .wrapper {
+        .form-container {
+            header {
+                i {
+                    margin-bottom: 10px;
+                }
+                h1 {
+                    font-size: 25px;
+                }
+            }
+            form {
+                margin-top: 40px;
+            }
+        }
+    }
+}
 .material-icons.md-120 {
     font-size: 120px;
 }
