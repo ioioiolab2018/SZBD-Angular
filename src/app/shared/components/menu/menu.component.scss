@@ -1,0 +1,40 @@
+@import "variables";
+
+nav.navigation {
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+
+    ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        li {
+            margin-bottom: 20px;
+
+            &:nth-last-of-type(1) {
+                margin-top: 10px;
+            }
+
+            a {
+                color: $menu-option;
+                font-size: 25px;
+                font-weight: 600;
+                text-decoration: none;
+                transition: color .3s ease-in-out;
+
+                &:hover {
+                    color: $blue-75;
+                }
+
+                &::first-letter {
+                    text-transform: uppercase;
+                }
+
+                &.active {
+                    color: $blue-75;
+                }
+            }
+        }
+    }
+}

@@ -25,6 +25,11 @@
                         "styles": [
                             "src/styles.scss"
                         ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "src/assets/css"
+                            ]
+                        },
                         "scripts": []
                     },
                     "configurations": {
@@ -122,5 +127,10 @@
             }
         }
     },
-    "defaultProject": "SZBD-Angular"
+    "defaultProject": "SZBD-Angular",
+    "schematics": {
+        "@schematics/angular:component": {
+            "styleext": "scss"
+        }
+    }
 }
