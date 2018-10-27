@@ -1,5 +1,5 @@
 <nav class="navigation">
     <ul>
-        <li *ngFor="let menuItem of items"><a href="" [routerLink]="menuItem.value" routerLinkActive="active">{{menuItem.name}}</a></li>
+        <li *ngFor="let menuItem of items"><a href="" [routerLink]="'./' + menuItem.value" routerLinkActive="active">{{menuItem.name}}</a></li>
     </ul>
 </nav>
