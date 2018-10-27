@@ -104,6 +104,9 @@ $input-text: rgb(90, 90, 90);
         }
     }
 }
+.material-icons.md-120 {
+    font-size: 120px;
+}
 @media (max-width: 1024px) {
     .wrapper {
         grid-template-columns: 1fr;
@@ -169,7 +172,7 @@ $input-text: rgb(90, 90, 90);
             }
         }
     }
-}
-.material-icons.md-120 {
-    font-size: 120px;
+    .material-icons.md-120 {
+        font-size: 100px;
+    }
 }
