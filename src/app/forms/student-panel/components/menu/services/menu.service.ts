@@ -18,12 +18,12 @@ export class MenuService {
     private initMenuOptions(): void {
         this.menuOptions = [
             { name: 'Informacje', value: 'info' },
-            { name: 'Oceny', value: '#' },
+            { name: 'Oceny', value: 'grades' },
             { name: 'Przedmioty', value: 'subjects' },
-            { name: 'Wnioski', value: '#' },
-            { name: 'Ankiety', value: '#' },
-            { name: 'Ustawienia', value: 'config' },
-            { name: 'Wyloguj', value: 'logout' },
+            { name: 'Wnioski', value: 'proposals' },
+            { name: 'Ankiety', value: 'questionnaires' },
+            { name: 'Ustawienia', value: 'settings' },
+            { name: 'Wyloguj', value: 'logout' }
         ];
     }
 }
