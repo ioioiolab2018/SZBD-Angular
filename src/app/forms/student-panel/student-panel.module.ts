@@ -10,9 +10,15 @@ import { SubjectsComponent } from './components/subjects/subjects.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ProposalsComponent } from './components/proposals/proposals.component';
 import { QuestionnairesComponent } from './components/questionnaires/questionnaires.component';
+import { HeadingModule } from 'src/app/shared/components/heading/heading.module';
 
 @NgModule({
-    imports: [CommonModule, StudentPanelRoutingModule, MenuModule],
+    imports: [
+        CommonModule,
+        HeadingModule,
+        StudentPanelRoutingModule,
+        MenuModule
+    ],
     declarations: [
         StudentPanelComponent,
         MenuComponent,

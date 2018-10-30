@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 nav.navigation {
     font-family: Montserrat, Arial, Helvetica, sans-serif;
@@ -21,10 +21,10 @@ nav.navigation {
                 font-size: 25px;
                 font-weight: 600;
                 text-decoration: none;
-                transition: color .3s ease-in-out;
+                transition: color 0.3s ease-in-out;
 
                 &:hover {
-                    color: $blue-75;
+                    color: rgb(117, 163, 255);
                 }
 
                 &::first-letter {
@@ -32,7 +32,7 @@ nav.navigation {
                 }
 
                 &.active {
-                    color: $blue-75;
+                    color: rgb(117, 163, 255);
                 }
             }
         }
