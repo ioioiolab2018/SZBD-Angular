@@ -1,0 +1,14 @@
+.table {
+    margin: 15px 0 25px;
+}
+
+.grades {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 15px;
+
+    szbd-grade-information {
+        flex-basis: 32%;
+    }
+}

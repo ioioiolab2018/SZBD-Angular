@@ -7,9 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeadingComponent implements OnInit {
     @Input()
-    heading: string;
+    heading: string = null;
     @Input()
-    value: string;
+    value: string = null;
 
     constructor() {}
 

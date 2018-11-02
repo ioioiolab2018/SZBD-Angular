@@ -1,0 +1,11 @@
+<article>
+    <header>
+        <h2>{{data.subject}}</h2>
+        <h3>{{data.subjectType}}</h3>
+    </header>
+    <section>
+        <p>wykładowca:<span>{{data.lecturer}}</span></p>
+        <p>data wystawienia:<span>{{data.date}}</span></p>
+        <p>ocena:<span>{{data.firstGrade + data.secondGrade ? "/" + data.secondGrade : ""}}</span></p>
+    </section>
+</article>

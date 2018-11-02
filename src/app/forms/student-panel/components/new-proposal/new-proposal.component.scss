@@ -1,0 +1,62 @@
+@import 'variables';
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    font-family: Raleway, Montserrat, Arial, Helvetica, sans-serif;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+        label {
+            margin-bottom: 5px;
+            color: $blue-75;
+            font-family: Montserrat, Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        input[type='text'],
+        textarea {
+            display: block;
+            width: 80%;
+            outline: none;
+            border-width: 0 0 1px;
+            border-color: rgb(220, 220, 220);
+        }
+
+        input[type='text'] {
+        }
+
+        textarea {
+            display: block;
+            resize: none;
+            overflow: auto;
+            height: 300px;
+        }
+
+        button {
+            align-self: flex-end;
+            margin-right: 50px;
+            width: 150px;
+            outline: none;
+            border: none;
+            box-shadow: none;
+            border-radius: 15px;
+            background-color: $blue-75;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            font-family: Montserrat, Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 40px;
+            cursor: pointer;
+            transition: 0.3s linear;
+
+            &:hover {
+                background-color: $blue-85;
+            }
+        }
+    }
+}

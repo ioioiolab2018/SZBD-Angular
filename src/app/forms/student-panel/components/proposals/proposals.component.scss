@@ -1,0 +1,79 @@
+@import 'variables';
+.table {
+    margin: 15px 0 25px;
+    div {
+        margin-top: 15px;
+
+        a {
+            display: block;
+            width: 350px;
+            border-radius: 15px;
+            background-color: $blue-75;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            text-align: center;
+            font-family: Montserrat, Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 40px;
+            transition: 0.3s linear;
+
+            &:hover {
+                background-color: $blue-85;
+            }
+        }
+    }
+}
+
+.proposal {
+    font-family: Raleway, Montserrat, Arial, Helvetica, sans-serif;
+    color: $text;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-family: Montserrat, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        h2 {
+            font-size: 25px;
+            color: $blue-75;
+            font-weight: 600;
+            &::first-letter {
+                text-transform: uppercase;
+            }
+        }
+        h3 {
+            font-size: 20px;
+            color: $text;
+            font-weight: 400;
+            &::first-letter {
+                text-transform: uppercase;
+            }
+
+            span {
+                color: $blue-75;
+            }
+        }
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-weight: 400;
+        margin-bottom: 20px;
+        p {
+            margin: 15px;
+            font-size: 15px;
+        }
+
+        h4 {
+            align-self: flex-end;
+            margin-right: 50px;
+            font-size: 15px;
+            font-weight: 400;
+            font-style: italic;
+        }
+    }
+}
