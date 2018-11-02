@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-questionnaires',
-  templateUrl: './questionnaires.component.html',
-  styleUrls: ['./questionnaires.component.scss']
+    selector: 'szbd-questionnaires',
+    templateUrl: './questionnaires.component.html',
+    styleUrls: ['./questionnaires.component.scss']
 })
 export class QuestionnairesComponent implements OnInit {
+    columns: string[];
 
-  constructor() { }
+    constructor() {
+        this.columns = ['Temat', 'Data od', 'Data do', 'Dostępna'];
+    }
 
-  ngOnInit() {
-  }
-
+    ngOnInit() {}
 }

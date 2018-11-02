@@ -1,1 +1,27 @@
 <szbd-heading heading="Wnioski"></szbd-heading>
+<section class="table">
+    <szbd-table [columns]="columns" [data]="data" (select)="getProposal($event)"></szbd-table>
+    <div><a href="" routerLink="./new">Nowy wniosek</a></div>
+</section>
+<section class="proposal" *ngIf="proposal">
+    <article>
+        <header>
+            <h2>{{proposal.topic}}</h2>
+            <h3>Data złożenia: <span>{{proposal.submissionDate}}</span></h3>
+        </header>
+        <section>
+            <p>{{proposal.content}}</p>
+            <h4>Podpis</h4>
+        </section>
+    </article>
+    <article>
+        <header>
+            <h2>odpowiedź</h2>
+            <h3>Data odpowiedzi: <span>{{proposal.answerDate}}</span></h3>
+        </header>
+        <section>
+            <p>{{proposal.answer}}</p>
+            <h4>Podpis</h4>
+        </section>
+    </article>
+</section>

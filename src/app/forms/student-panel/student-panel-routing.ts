@@ -6,7 +6,7 @@ import { ProposalsComponent } from './components/proposals/proposals.component';
 import { GradesComponent } from './components/grades/grades.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 import { QuestionnairesComponent } from './components/questionnaires/questionnaires.component';
-import { SettingsComponent } from './components/settings/settings.component';
+import { NewProposalComponent } from './components/new-proposal/new-proposal.component';
 
 const loginRouting: Routes = [
     {
@@ -39,8 +39,8 @@ const loginRouting: Routes = [
                 component: QuestionnairesComponent
             },
             {
-                path: 'settings',
-                component: SettingsComponent
+                path: 'proposals/new',
+                component: NewProposalComponent
             }
         ]
     }

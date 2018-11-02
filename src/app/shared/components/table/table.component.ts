@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TableData } from '../../model/table-data';
+import { TableValue } from '../../model/table_value';
 
 @Component({
     selector: 'szbd-table',
@@ -14,13 +15,13 @@ export class TableComponent implements OnInit {
     @Input()
     withFooter = false;
     @Output()
-    select = new EventEmitter<string>();
+    select = new EventEmitter<TableValue>();
 
     constructor() {}
 
     ngOnInit() {}
 
-    returnRowValue(val: string): void {
-        this.select.emit(val);
+    returnRowValue(val: TableData): void {
+        this.select.emit(new TableValue(val.id, val.column1));
     }
 }

@@ -5,7 +5,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of data" (click)="returnRowValue(row.column1)">
+        <tr *ngFor="let row of data" (click)="returnRowValue(row)">
             <td>{{row.column1}}</td>
             <td>{{row.column2}}</td>
             <td>{{row.column3}}</td>
@@ -14,7 +14,7 @@
     </tbody>
     <tfoot *ngIf="withFooter">
         <tr>
-            <td *ngFor="let column of columns"></td>
+            <td *ngFor="let column of columns"> </td>
         </tr>
     </tfoot>
 </table>

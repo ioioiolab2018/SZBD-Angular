@@ -22,7 +22,6 @@ export class MenuService {
             { name: 'Przedmioty', value: 'subjects' },
             { name: 'Wnioski', value: 'proposals' },
             { name: 'Ankiety', value: 'questionnaires' },
-            { name: 'Ustawienia', value: 'settings' },
             { name: 'Wyloguj', value: 'logout' }
         ];
     }
