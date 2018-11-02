@@ -1,6 +1,6 @@
 <szbd-heading heading="Oceny"></szbd-heading>
 <section class="table">
-    <szbd-table [columns]="columns" [data]="data" (select)="getGrades($event)"></szbd-table>
+    <szbd-table [columns]="columns" [data]="data" (select)="getGrades($event)" withFooter="true"></szbd-table>
 </section>
 <div *ngIf="selectedSemester">
     <szbd-heading heading="Semestr" [value]="selectedSemester"></szbd-heading>
