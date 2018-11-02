@@ -1,0 +1,20 @@
+<table>
+    <thead>
+        <tr>
+            <th *ngFor="let column of columns">{{column}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of data" (click)="returnRowValue(row.column1)">
+            <td>{{row.column1}}</td>
+            <td>{{row.column2}}</td>
+            <td>{{row.column3}}</td>
+            <td *ngIf="row.column4">{{row.column4}}</td>
+        </tr>
+    </tbody>
+    <tfoot *ngIf="withFooter">
+        <tr>
+            <td *ngFor="let column of columns"></td>
+        </tr>
+    </tfoot>
+</table>
