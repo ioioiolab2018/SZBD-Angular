@@ -1,1 +1,24 @@
 <szbd-heading heading="Ankiety"></szbd-heading>
+<section class="table">
+    <szbd-table [columns]="columns" [data]="data" (select)="getQuestionnaire($event)"></szbd-table>
+</section>
+<section class="questionnaire" *ngIf="questionnaire">
+    <form [formGroup]="questionnaireForm" (submit)="saveQuestionnnaire()">
+        <article>
+            <header>
+                <h2>{{questionnaire.name}}</h2>
+                <h3>Data odpowiedzi: <span>{{questionnaire.date | date:'d.M.yyyy'}}</span></h3>
+            </header>
+            <section>
+                <p>{{questionnaire.content}}</p>
+                <div>
+                    <label *ngFor="let option of questionnaire.options">
+                        <input type="radio" name="answer" [value]="option" formControlName="answer">
+                        <span class="circle"></span><span>{{option}}</span>
+                    </label>
+                </div>
+            </section>
+            <footer><button type="submit" [disabled]="questionnaire.available === 'F' || !questionnaireForm.valid">Zapisz</button></footer>
+        </article>
+    </form>
+</section>
