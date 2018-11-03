@@ -3,6 +3,7 @@ import { Questionnaire } from 'src/app/shared/model/questionnaire';
 import { TableData } from 'src/app/shared/model/table-data';
 import { TableValue } from 'src/app/shared/model/table_value';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MenuOption } from 'src/app/shared/model/menu-option';
 
 @Component({
     selector: 'szbd-questionnaires',
@@ -14,6 +15,7 @@ export class QuestionnairesComponent implements OnInit {
     data: TableData[];
     questionnaire: Questionnaire;
     questionnaireForm: FormGroup;
+    dataFilterOptions: MenuOption[];
 
     constructor() {
         this.questionnaireForm = new FormGroup({ answer: new FormControl('') });
@@ -31,8 +33,13 @@ export class QuestionnairesComponent implements OnInit {
                 'Wolne',
                 new Date().toDateString(),
                 new Date().toDateString(),
-                'F'
+                'T'
             )
+        ];
+        this.dataFilterOptions = [
+            new MenuOption('Otwarte', 'OPENED'),
+            new MenuOption('Wszystkie', 'ALL'),
+            new MenuOption('Zamknięte', 'CLOSED')
         ];
     }
 
@@ -46,12 +53,14 @@ export class QuestionnairesComponent implements OnInit {
             ['tak', 'nie'],
             'tak',
             new Date(),
-            'F'
+            val.column === 'Piniążki' ? 'F' : 'T'
         );
         this.questionnaireForm.patchValue({
             answer: this.questionnaire.answer
         });
     }
+
+    getQuestionnaires(): void {}
 
     saveQuestionnnaire(): void {}
 }

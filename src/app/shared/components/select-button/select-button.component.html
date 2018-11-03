@@ -1,0 +1,8 @@
+<div>
+    <label *ngFor="let option of options; index as i;" (click)="selectValue(option.value)">
+        <input type="radio" name="select-button" [value]="option.value" [defaultChecked]="isMiddle(i)">
+        <div>
+            <span>{{option.name}}</span>
+        </div>
+    </label>
+</div>

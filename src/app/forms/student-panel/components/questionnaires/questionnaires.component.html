@@ -1,6 +1,11 @@
 <szbd-heading heading="Ankiety"></szbd-heading>
 <section class="table">
-    <szbd-table [columns]="columns" [data]="data" (select)="getQuestionnaire($event)"></szbd-table>
+    <div>
+        <szbd-select-button [options]="dataFilterOptions" (select)="getQuestionnaires()"></szbd-select-button>
+    </div>
+    <div>
+        <szbd-table [columns]="columns" [data]="data" (select)="getQuestionnaire($event)"></szbd-table>
+    </div>
 </section>
 <section class="questionnaire" *ngIf="questionnaire">
     <form [formGroup]="questionnaireForm" (submit)="saveQuestionnnaire()">

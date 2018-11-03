@@ -14,6 +14,7 @@ import { GradeInformationModule } from 'src/app/shared/components/grade-informat
 import { TableModule } from 'src/app/shared/components/table/table.module';
 import { NewProposalComponent } from './components/new-proposal/new-proposal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SelectButtonModule } from 'src/app/shared/components/select-button/select-button.module';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         HeadingModule,
         MenuModule,
         ReactiveFormsModule,
+        SelectButtonModule,
         StudentPanelRoutingModule,
         TableModule
     ],

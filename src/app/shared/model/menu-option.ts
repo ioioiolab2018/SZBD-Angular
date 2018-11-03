@@ -1,4 +1,3 @@
-export interface MenuOption {
-    name: string;
-    value: string;
+export class MenuOption {
+    constructor(public name?: string, public value?: string) {}
 }
