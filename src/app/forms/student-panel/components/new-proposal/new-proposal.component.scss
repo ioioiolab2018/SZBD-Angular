@@ -57,6 +57,14 @@ form {
             &:hover {
                 background-color: $blue-85;
             }
+
+            &:disabled {
+                background-color: $blue-50;
+                cursor: default;
+                &:hover {
+                    background-color: $blue-50;
+                }
+            }
         }
     }
 }

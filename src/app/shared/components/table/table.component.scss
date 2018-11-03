@@ -18,6 +18,7 @@ table {
     tbody tr {
         background-color: rgb(245, 245, 245);
         cursor: pointer;
+        transition: 0.3 linear;
 
         td {
             padding: 5px 20px;
