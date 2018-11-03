@@ -1,1 +1,32 @@
 <szbd-heading heading="Przedmioty"></szbd-heading>
+<section class="table">
+    <div>
+        <szbd-select-button [options]="dataFilterOptions" (select)="getSubjects()"></szbd-select-button>
+    </div>
+    <div>
+        <table>
+            <ng-container *ngFor="let semester of subjects">
+                <tr class="semester">
+                    <td colspan="4">Semestr {{semester.nr}}</td>
+                </tr>
+                <tr *ngFor="let row of semester.data" (click)="getSubject(row)">
+                    <td>{{row.column1}}</td>
+                    <td>{{row.column2}}</td>
+                    <td><span>{{row.column3}}</span> ECTS</td>
+                    <td>{{row.column4}}</td>
+                </tr>
+            </ng-container>
+        </table>
+    </div>
+</section>
+<section class="subject" *ngIf="subject">
+    <article>
+        <header>
+            <h2>{{subject.name}}</h2>
+            <h3>Punkty ECTS: <span>{{subject.ectsValue}}</span></h3>
+        </header>
+        <section>
+            <pre>{{subject.description}}</pre>
+        </section>
+    </article>
+</section>
