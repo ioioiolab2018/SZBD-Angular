@@ -1,7 +1,7 @@
 <szbd-heading heading="Przedmioty"></szbd-heading>
 <section class="table">
     <div>
-        <szbd-select-button [options]="dataFilterOptions" (select)="getSubjects()"></szbd-select-button>
+        <szbd-select-button [options]="dataFilterOptions" (select)="getSubjects($event)"></szbd-select-button>
     </div>
     <div>
         <table>
