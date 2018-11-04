@@ -101,11 +101,30 @@ export class HttpService {
         console.log(val, 'Save answer!');
     }
 
-    getSubjects(): Observable<Array<SemesterData>> {
-        return null;
+    getSubjects(filter: string): Observable<Array<SemesterData>> {
+        return new BehaviorSubject<Array<SemesterData>>([
+            new SemesterData('I', [
+                new TableData(1, 'Matematyka', 'ktos', 5, 'T'),
+                new TableData(2, 'Informatyka', 'ktos2', 6, 'T')
+            ]),
+            new SemesterData('I', [
+                new TableData(3, 'Sieci komputerowe', 'ktos', 4, 'F'),
+                new TableData(4, 'Bazy danych', 'ktos3', 5, 'T')
+            ])
+        ]).asObservable();
     }
 
     getSubject(id: number): Observable<Subject> {
-        return null;
+        return new BehaviorSubject<Subject>(
+            new Subject(
+                1,
+                'Informatyka',
+                // tslint:disable-next-line:max-line-length
+                'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum sed in cupiditate veniam, numquam quia laborum eveniet minima maiores labore, quod, quidem asperiores non eos. Molestiae, neque iste. Reprehenderit, maxime.\nItaque accusantium facere in voluptatibus animi ut a reprehenderit fugit labore consequatur et eum deserunt sint, corrupti velit culpa nemo doloribus ducimus consequuntur. \nNatus fuga amet soluta. Eveniet, obcaecati tenetur.Blanditiis cupiditate in suscipit eaque officiis consequuntur labore qui aliquam et eos. Esse quos quisquam repellat excepturi perspiciatis vel aut molestiae doloribus reprehenderit aperiam ducimus debitis officiis, nulla placeat quo.Ut voluptatem perferendis aliquid, officia ipsa sapiente dignissimos ipsam eius architecto molestiae commodi iure necessitatibus facere aut laborum sint, odio enim ducimus sed. Molestias velit, reiciendis optio obcaecati quasi facilis!Ea nulla officia assumenda. \nQuod maiores illo asperiores nobis, quis labore eaque enim molestias quae magni dolorem odit est facere laboriosam quibusdam modi blanditiis aperiam esse voluptatem dignissimos necessitatibus! Qui!',
+                'ktos2',
+                4,
+                0
+            )
+        );
     }
 }
