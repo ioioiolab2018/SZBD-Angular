@@ -58,7 +58,9 @@ export class HttpService {
         ).asObservable();
     }
 
-    saveProposal(val): void {}
+    saveProposal(val: Proposal): void {
+        console.log(val, 'Save proposal!');
+    }
 
     getQuestionnaires(filter: string): Observable<Array<TableData>> {
         return new BehaviorSubject<Array<TableData>>([
@@ -96,7 +98,7 @@ export class HttpService {
     }
 
     saveQuestionnaire(val: QuestionnaireAnswer): void {
-        console.log('Save answer!');
+        console.log(val, 'Save answer!');
     }
 
     getSubjects(): Observable<Array<SemesterData>> {
