@@ -8,6 +8,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { GradeInformation } from 'src/app/shared/model/grade-information';
 import { SemesterData } from 'src/app/shared/model/semester-data';
 import { QuestionnaireAnswer } from 'src/app/shared/model/questionnaire-answer';
+import { StudentInfo } from 'src/app/shared/model/student-info';
 
 @Injectable({
     providedIn: 'root'
@@ -31,8 +32,10 @@ export class HttpService {
         ]).asObservable();
     }
 
-    getInformations(): Observable<any> {
-        return null;
+    getInformations(): Observable<StudentInfo> {
+        return new BehaviorSubject<StudentInfo>(
+            new StudentInfo()
+        ).asObservable();
     }
 
     getProposals(): Observable<Array<TableData>> {
