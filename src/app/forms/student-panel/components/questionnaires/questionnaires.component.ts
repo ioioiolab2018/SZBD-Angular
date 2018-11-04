@@ -4,61 +4,54 @@ import { TableData } from 'src/app/shared/model/table-data';
 import { TableValue } from 'src/app/shared/model/table_value';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MenuOption } from 'src/app/shared/model/menu-option';
+import { QuestionnaireService } from './services/questionnaire.service';
 
 @Component({
     selector: 'szbd-questionnaires',
     templateUrl: './questionnaires.component.html',
-    styleUrls: ['./questionnaires.component.scss']
+    styleUrls: ['./questionnaires.component.scss'],
+    providers: [QuestionnaireService]
 })
-export class QuestionnairesComponent implements OnInit {
+export class QuestionnairesComponent {
     columns: string[];
     data: TableData[];
     questionnaire: Questionnaire;
     questionnaireForm: FormGroup;
     dataFilterOptions: MenuOption[];
 
-    constructor() {
+    constructor(private questionnaireService: QuestionnaireService) {
         this.questionnaireForm = new FormGroup({ answer: new FormControl('') });
-        this.columns = ['Temat', 'Data od', 'Data do', 'Dostępna'];
-        this.data = [
-            new TableData(
-                1,
-                'Piniążki',
-                new Date().toDateString(),
-                new Date().toDateString(),
-                'F'
-            ),
-            new TableData(
-                1,
-                'Wolne',
-                new Date().toDateString(),
-                new Date().toDateString(),
-                'T'
-            )
-        ];
-        this.dataFilterOptions = [
-            new MenuOption('Otwarte', 'OPENED'),
-            new MenuOption('Wszystkie', 'ALL'),
-            new MenuOption('Zamknięte', 'CLOSED')
-        ];
+        this.init();
     }
 
-    ngOnInit() {}
+    private init(): void {
+        this.questionnaireService
+            .getColumnNamesObs()
+            .subscribe((val: string[]) => {
+                this.columns = val;
+            });
+        this.questionnaireService
+            .getDataFilterOptionsObs()
+            .subscribe((val: MenuOption[]) => {
+                this.dataFilterOptions = val;
+            });
+        this.questionnaireService
+            .getQuestionnairesObs()
+            .subscribe((val: TableData[]) => {
+                this.data = val;
+            });
+        this.questionnaireService
+            .getQuestionnaireObs()
+            .subscribe((val: Questionnaire) => {
+                this.questionnaire = val;
+                this.questionnaireForm.patchValue({
+                    answer: this.questionnaire.answer
+                });
+            });
+    }
 
     getQuestionnaire(val: TableValue): void {
-        this.questionnaire = new Questionnaire(
-            val.id,
-            val.column,
-            // tslint:disable-next-line:max-line-length
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Id mollitia vel consequuntur quam accusantium atque similique, expedita blanditiis quod provident illum labore quibusdam nemo sunt, placeat nobis quia cumque deleniti? Vero, harum iure? Odit vitae nobis, nulla vero vel nihil iusto reiciendis deserunt. Blanditiis voluptatem porro accusantium quam, voluptas impedit iure quae unde. Nemo, facilis libero. Modi debitis possimus mollitia. Corporis corrupti, doloribus exercitationem quo cum neque? A ipsum fugit quod quas dolores rem labore fugiat, dolore nulla laudantium, laborum magni sed voluptatibus praesentium aperiam necessitatibus pariatur fuga distinctio explicabo! Ratione pariatur aperiam iure perferendis hic culpa necessitatibus numquam nihil in recusandae temporibus fugiat beatae mollitia magni, repellendus provident labore. Ipsum quisquam vitae molestias placeat doloribus deleniti veniam quae pariatur? Nam esse aperiam nihil ipsum molestias, distinctio nostrum laudantium, illum quos dicta ea asperiores. Ipsa magnam sit libero earum quos distinctio ut veniam. Cum enim harum aspernatur sapiente aliquam facere.',
-            ['tak', 'nie'],
-            'tak',
-            new Date(),
-            val.column === 'Piniążki' ? 'F' : 'T'
-        );
-        this.questionnaireForm.patchValue({
-            answer: this.questionnaire.answer
-        });
+        this.questionnaireService.getQuestionnaire(val.id);
     }
 
     getQuestionnaires(): void {}
