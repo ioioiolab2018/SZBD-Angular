@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Questionnaire } from 'src/app/shared/model/questionnaire';
 import { TableData } from 'src/app/shared/model/table-data';
 import { TableValue } from 'src/app/shared/model/table_value';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MenuOption } from 'src/app/shared/model/menu-option';
 import { QuestionnaireService } from './services/questionnaire.service';
 import { QuestionnaireAnswer } from 'src/app/shared/model/questionnaire-answer';
@@ -21,7 +21,9 @@ export class QuestionnairesComponent {
     dataFilterOptions: MenuOption[];
 
     constructor(private questionnaireService: QuestionnaireService) {
-        this.questionnaireForm = new FormGroup({ answer: new FormControl('') });
+        this.questionnaireForm = new FormGroup({
+            answer: new FormControl('', Validators.required)
+        });
         this.init();
     }
 
