@@ -1,6 +1,7 @@
 export class Questionnaire {
     constructor(
         public id?: number,
+        public questionnaire?: number,
         public name?: string,
         public content?: string,
         public options?: any,

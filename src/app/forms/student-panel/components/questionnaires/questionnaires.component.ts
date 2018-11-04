@@ -5,6 +5,7 @@ import { TableValue } from 'src/app/shared/model/table_value';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MenuOption } from 'src/app/shared/model/menu-option';
 import { QuestionnaireService } from './services/questionnaire.service';
+import { QuestionnaireAnswer } from 'src/app/shared/model/questionnaire-answer';
 
 @Component({
     selector: 'szbd-questionnaires',
@@ -54,7 +55,18 @@ export class QuestionnairesComponent {
         this.questionnaireService.getQuestionnaire(val.id);
     }
 
-    getQuestionnaires(): void {}
+    getQuestionnaires(filter: string): void {
+        this.questionnaireService.getQuestionnaires(filter);
+    }
 
-    saveQuestionnnaire(): void {}
+    saveQuestionnnaire(): void {
+        this.questionnaireService.saveQuestionnaire(
+            new QuestionnaireAnswer(
+                this.questionnaire.id,
+                this.questionnaire.questionnaire,
+                this.questionnaireForm.value.answer,
+                new Date()
+            )
+        );
+    }
 }
