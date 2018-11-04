@@ -7,7 +7,7 @@
     <article>
         <header>
             <h2>{{proposal.topic}}</h2>
-            <h3>Data złożenia: <span>{{proposal.submissionDate}}</span></h3>
+            <h3>Data złożenia: <span>{{proposal.submissionDate | date:'d.M.yyyy'}}</span></h3>
         </header>
         <section>
             <p>{{proposal.content}}</p>
@@ -17,7 +17,7 @@
     <article>
         <header>
             <h2>odpowiedź</h2>
-            <h3>Data odpowiedzi: <span>{{proposal.answerDate}}</span></h3>
+            <h3>Data odpowiedzi: <span>{{proposal.answerDate | date:'d.M.yyyy'}}</span></h3>
         </header>
         <section>
             <p>{{proposal.answer}}</p>
