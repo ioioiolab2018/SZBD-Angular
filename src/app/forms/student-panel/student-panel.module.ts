@@ -15,12 +15,15 @@ import { TableModule } from 'src/app/shared/components/table/table.module';
 import { NewProposalComponent } from './components/new-proposal/new-proposal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'src/app/shared/components/select-button/select-button.module';
+import { HttpService } from './services/http.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
         CommonModule,
         GradeInformationModule,
         HeadingModule,
+        HttpClientModule,
         MenuModule,
         ReactiveFormsModule,
         SelectButtonModule,
@@ -36,6 +39,7 @@ import { SelectButtonModule } from 'src/app/shared/components/select-button/sele
         StudentPanelComponent,
         SubjectsComponent,
         NewProposalComponent
-    ]
+    ],
+    providers: [HttpService]
 })
 export class StudentPanelModule {}

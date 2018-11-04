@@ -1,14 +1,14 @@
-<szbd-heading heading="Wnioski" (ngSubmit)="sendProposal()"></szbd-heading>
-<form [formGroup]="proposalForm">
+<szbd-heading heading="Wnioski"></szbd-heading>
+<form [formGroup]="proposalForm" (ngSubmit)="sendProposal()">
     <div>
         <label for="topic">Tytuł</label>
         <input type="text" name="topic" id="topic" formControlName="topic">
     </div>
     <div>
         <label for="content">Tresć</label>
-        <textarea name="content" id="content" formControlName="topic"></textarea>
+        <textarea name="content" id="content" formControlName="content"></textarea>
     </div>
     <div>
-        <button type="submit">Wyslij</button>
+        <button type="submit" [disabled]="!proposalForm.valid">Wyslij</button>
     </div>
 </form>

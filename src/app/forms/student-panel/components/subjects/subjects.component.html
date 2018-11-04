@@ -1,7 +1,7 @@
 <szbd-heading heading="Przedmioty"></szbd-heading>
 <section class="table">
     <div>
-        <szbd-select-button [options]="dataFilterOptions" (select)="getSubjects()"></szbd-select-button>
+        <szbd-select-button [options]="dataFilterOptions" (select)="getSubjects($event)"></szbd-select-button>
     </div>
     <div>
         <table>
@@ -9,7 +9,7 @@
                 <tr class="semester">
                     <td colspan="4">Semestr {{semester.nr}}</td>
                 </tr>
-                <tr *ngFor="let row of semester.data" (click)="getSubject(row)">
+                <tr *ngFor="let row of semester.data" (click)="getSubject(row.id)">
                     <td>{{row.column1}}</td>
                     <td>{{row.column2}}</td>
                     <td><span>{{row.column3}}</span> ECTS</td>

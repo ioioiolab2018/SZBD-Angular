@@ -1,7 +1,7 @@
 <szbd-heading heading="Ankiety"></szbd-heading>
 <section class="table">
     <div>
-        <szbd-select-button [options]="dataFilterOptions" (select)="getQuestionnaires()"></szbd-select-button>
+        <szbd-select-button [options]="dataFilterOptions" (select)="getQuestionnaires($event)"></szbd-select-button>
     </div>
     <div>
         <szbd-table [columns]="columns" [data]="data" (select)="getQuestionnaire($event)"></szbd-table>
