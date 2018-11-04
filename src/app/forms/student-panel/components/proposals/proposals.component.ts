@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TableData } from 'src/app/shared/model/table-data';
 import { TableValue } from 'src/app/shared/model/table_value';
 import { Proposal } from 'src/app/shared/model/proposal';

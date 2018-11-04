@@ -9,7 +9,7 @@ import { Proposal } from 'src/app/shared/model/proposal';
     styleUrls: ['./new-proposal.component.scss'],
     providers: [ProposalService]
 })
-export class NewProposalComponent implements OnInit {
+export class NewProposalComponent {
     proposalForm: FormGroup;
     constructor(private proposalService: ProposalService) {
         this.proposalForm = new FormGroup({
@@ -17,8 +17,6 @@ export class NewProposalComponent implements OnInit {
             content: new FormControl('', Validators.required)
         });
     }
-
-    ngOnInit() {}
 
     sendProposal(): void {
         this.proposalService.saveProposal(

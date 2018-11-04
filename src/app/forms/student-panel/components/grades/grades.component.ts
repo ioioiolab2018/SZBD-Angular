@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GradeInformation } from 'src/app/shared/model/grade-information';
 import { TableData } from 'src/app/shared/model/table-data';
 import { TableValue } from 'src/app/shared/model/table_value';
