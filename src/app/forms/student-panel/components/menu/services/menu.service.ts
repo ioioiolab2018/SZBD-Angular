@@ -21,8 +21,7 @@ export class MenuService {
             new MenuOption('Oceny', 'grades'),
             new MenuOption('Przedmioty', 'subjects'),
             new MenuOption('Wnioski', 'proposals'),
-            new MenuOption('Ankiety', 'questionnaires'),
-            new MenuOption('Wyloguj', 'logout')
+            new MenuOption('Ankiety', 'questionnaires')
         ];
     }
 }

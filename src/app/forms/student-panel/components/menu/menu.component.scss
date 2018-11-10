@@ -19,4 +19,25 @@ header.menu {
         font-weight: 700;
         margin-bottom: 60px;
     }
+
+    a.logout {
+        color: $menu-option;
+        font-size: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.3s ease-in-out;
+
+        &:hover {
+            color: rgb(117, 163, 255);
+        }
+
+        &::first-letter {
+            text-transform: uppercase;
+        }
+
+        &.active {
+            color: rgb(117, 163, 255);
+        }
+    }
 }

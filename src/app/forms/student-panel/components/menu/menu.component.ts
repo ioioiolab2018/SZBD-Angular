@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from './services/menu.service';
 import { MenuOption } from 'src/app/shared/model/menu-option';
+import { AuthenticationService } from 'src/app/auth/services/authentication.service';
 
 @Component({
     selector: 'szbd-student-menu',
@@ -10,11 +11,17 @@ import { MenuOption } from 'src/app/shared/model/menu-option';
 export class MenuComponent implements OnInit {
     menuOptions: MenuOption[];
 
-    constructor(private menuService: MenuService) {
+    constructor(
+        private authenticationService: AuthenticationService,
+        private menuService: MenuService
+    ) {
         this.menuOptions = this.menuService.getMenuOptions();
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
+    logout(): void {
+        this.authenticationService.logout();
+        location.reload(true);
+    }
 }
