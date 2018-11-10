@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginPanelComponent } from './login-panel.component';
+import { LoginGuardService } from 'src/app/auth/guards/login-guard.service';
 
 const loginRouting: Routes = [
     {
@@ -10,7 +11,8 @@ const loginRouting: Routes = [
     },
     {
         path: 'login',
-        component: LoginPanelComponent
+        component: LoginPanelComponent,
+        canActivate: [LoginGuardService]
     }
 ];
 
@@ -18,4 +20,4 @@ const loginRouting: Routes = [
     imports: [RouterModule.forChild(loginRouting)],
     exports: [RouterModule]
 })
-export class LoginPanelRoutingModule { }
+export class LoginPanelRoutingModule {}
