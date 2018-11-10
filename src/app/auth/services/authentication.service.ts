@@ -11,7 +11,7 @@ export class AuthenticationService {
 
     login(username: string, password: string): Observable<any> {
         return this.http
-            .post<any>('api/authenticate', {
+            .post<any>('api/authentication/generate-token', {
                 username,
                 password
             })
