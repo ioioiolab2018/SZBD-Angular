@@ -12,10 +12,6 @@ nav.navigation {
         li {
             margin-bottom: 20px;
 
-            &:nth-last-of-type(1) {
-                margin-top: 10px;
-            }
-
             a {
                 color: $menu-option;
                 font-size: 25px;
