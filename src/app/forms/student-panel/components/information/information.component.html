@@ -2,40 +2,40 @@
     <article>
         <szbd-heading heading="Dane osobowe"></szbd-heading>
         <div>
-            <p>Imię: <span>{{information.name}}</span></p>
-            <p>Drugię imię: <span>{{information.secondName}}</span></p>
-            <p>Nazwisko: <span>{{information.surname}}</span></p>
-            <p>PESEL: <span>{{information.pesel}}</span></p>
-            <p>Data urodzenia: <span>{{information.birthplace}}</span></p>
-            <p>Miejsce urodzenia: <span>{{information.birthDate}}</span></p>
-            <p>Imię ojca: <span>{{information.fatherName}}</span></p>
-            <p>Imię matki: <span>{{information.motherName}}</span></p>
-            <p>Płeć: <span>{{information.sex}}</span></p>
+            <p>Imię: <span *ngIf="information">{{information.name}}</span></p>
+            <p>Drugię imię: <span *ngIf="information">{{information.secondName}}</span></p>
+            <p>Nazwisko: <span *ngIf="information">{{information.surname}}</span></p>
+            <p>PESEL: <span *ngIf="information">{{information.pesel}}</span></p>
+            <p>Data urodzenia: <span *ngIf="information">{{information.birthDate | date: 'dd.MM.yyyy'}}</span></p>
+            <p>Miejsce urodzenia: <span *ngIf="information">{{information.birthPlace}}</span></p>
+            <p>Imię ojca: <span *ngIf="information">{{information.fatherName}}</span></p>
+            <p>Imię matki: <span *ngIf="information">{{information.motherName}}</span></p>
+            <p>Płeć: <span *ngIf="information">{{information.sex === 'MALE' ? 'mężczyzna' : 'kobieta'}}</span></p>
         </div>
     </article>
     <article>
         <szbd-heading heading="Dane kontaktowe"></szbd-heading>
         <div>
-            <p>e-mail: <span>{{information.email}}</span></p>
-            <p>telefon: <span>{{information.phone}}</span></p>
-            <p>Adres: <span>{{information.address}}</span></p>
-            <p>Adres kontaktowy: <span>{{information.contactAddress}}</span></p>
-            <p>Adres tymczasowy: <span>{{information.temporaryAddress}}</span></p>
+            <p>e-mail: <span *ngIf="information">{{information.email}}</span></p>
+            <p>telefon: <span *ngIf="information">{{information.phone}}</span></p>
+            <p>Adres: <span *ngIf="information">{{information.address}}</span></p>
+            <p>Adres kontaktowy: <span *ngIf="information">{{information.contactAddress}}</span></p>
+            <p>Adres tymczasowy: <span *ngIf="information">{{information.temporaryAddress}}</span></p>
         </div>
     </article>
     <article>
         <szbd-heading heading="Informacje o studiach"></szbd-heading>
         <div>
-            <p>Indeks: <span>{{information.index}}</span></p>
-            <p>Semestr: <span>{{information.semester}}</span></p>
-            <p>Wydział: <span>{{information.faculty}}</span></p>
-            <p>Kierunek: <span>{{information.studyField}}</span></p>
-            <p>Rodzaj studiów: <span>{{information.studyMode}}</span></p>
-            <p>Forma studiów: <span>{{information.type}}</span></p>
-            <p>Status: <span>{{information.status}}</span></p>
-            <p>Zdobyte punkty ECTS: <span>{{information.ectsPoints</span></p>
-            <p>Data rozpoczęcia studiów: <span>{{information.startDate}}</span></p>
-            <p>Data zakończenia studiów: <span>{{information.endDate}}</span></p>
+            <p>Indeks: <span *ngIf="information">{{information.index}}</span></p>
+            <p>Semestr: <span *ngIf="information">{{information.semester}}</span></p>
+            <p>Wydział: <span *ngIf="information">{{information.faculty}}</span></p>
+            <p>Kierunek: <span *ngIf="information">{{information.studyField}}</span></p>
+            <p>Rodzaj studiów: <span *ngIf="information">{{information.studyMode}}</span></p>
+            <p>Forma studiów: <span *ngIf="information">{{information.type}}</span></p>
+            <p>Status: <span *ngIf="information">{{information.status}}</span></p>
+            <p>Zdobyte punkty ECTS: <span *ngIf="information">{{information.ectsPoints}}</span></p>
+            <p>Data rozpoczęcia studiów: <span *ngIf="information">{{information.startDate | date: 'dd.MM.yyyy'}}</span></p>
+            <p>Data zakończenia studiów: <span *ngIf="information">{{information.endDate | date: 'dd.MM.yyyy'}}</span></p>
         </div>
     </article>
 </div>

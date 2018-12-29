@@ -8,13 +8,22 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { GradeInformation } from 'src/app/shared/model/grade-information';
 import { SemesterData } from 'src/app/shared/model/semester-data';
 import { QuestionnaireAnswer } from 'src/app/shared/model/questionnaire-answer';
-import { StudentInfo } from 'src/app/shared/model/student-info';
+import { StudentInformation } from 'src/app/shared/model/student-information';
+import { Authentication } from 'src/app/shared/model/authentication';
 
 @Injectable({
     providedIn: 'root'
 })
 export class HttpService {
+
+    private studentInfo = 'api/student/student-info/';
+
     constructor(private http: HttpClient) {}
+
+    getStudentInformations(): Observable<StudentInformation> {
+        const authentication: Authentication = JSON.parse(localStorage.getItem('authentication'));
+        return this.http.get<StudentInformation>(this.studentInfo+authentication.username)
+    }
 
     getSemesters(): Observable<Array<TableData>> {
         // return this.http.get<Array<TableData>>('');
@@ -32,9 +41,9 @@ export class HttpService {
         ]).asObservable();
     }
 
-    getInformations(): Observable<StudentInfo> {
-        return new BehaviorSubject<StudentInfo>(
-            new StudentInfo()
+    getInformations(): Observable<StudentInformation> {
+        return new BehaviorSubject<StudentInformation>(
+            new StudentInformation()
         ).asObservable();
     }
 
