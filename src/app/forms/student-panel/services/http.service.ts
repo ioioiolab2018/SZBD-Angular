@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { TableData } from 'src/app/shared/model/table-data';
 import { Proposal } from 'src/app/shared/model/proposal';
 import { Questionnaire } from 'src/app/shared/model/questionnaire';
@@ -17,6 +17,8 @@ import { Router } from '@angular/router';
 })
 export class HttpService {
     private studentInformationUrl = 'api/student/student-info/';
+    private studentQuestionnairesListUrl = 'api/student/questionnaires/';
+    private studentQuestionnaireUrl = 'api/student/questionnaire/';
     private studentProposalsListUrl = 'api/commons/proposals/';
     private studentProposalUrl = 'api/commons/proposal/';
 
@@ -72,42 +74,17 @@ export class HttpService {
     }
 
     getQuestionnaires(filter: string): Observable<Array<TableData>> {
-        return new BehaviorSubject<Array<TableData>>([
-            new TableData(
-                1,
-                'Piniążki',
-                new Date().toDateString(),
-                new Date().toDateString(),
-                'F'
-            ),
-            new TableData(
-                1,
-                'Wolne',
-                new Date().toDateString(),
-                new Date().toDateString(),
-                'T'
-            )
-        ]).asObservable();
+        const options = { params: new HttpParams().set('filter', filter) };
+        return this.http.get<Array<TableData>>(this.studentQuestionnairesListUrl + this.getAuthentication().username, options);
     }
 
     getQuestionnaire(id: number): Observable<Questionnaire> {
-        return new BehaviorSubject<Questionnaire>(
-            new Questionnaire(
-                1,
-                1,
-                'Piniążki',
-                // tslint:disable-next-line:max-line-length
-                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Id mollitia vel consequuntur quam accusantium atque similique, expedita blanditiis quod provident illum labore quibusdam nemo sunt, placeat nobis quia cumque deleniti? Vero, harum iure? Odit vitae nobis, nulla vero vel nihil iusto reiciendis deserunt. Blanditiis voluptatem porro accusantium quam, voluptas impedit iure quae unde. Nemo, facilis libero. Modi debitis possimus mollitia. Corporis corrupti, doloribus exercitationem quo cum neque? A ipsum fugit quod quas dolores rem labore fugiat, dolore nulla laudantium, laborum magni sed voluptatibus praesentium aperiam necessitatibus pariatur fuga distinctio explicabo! Ratione pariatur aperiam iure perferendis hic culpa necessitatibus numquam nihil in recusandae temporibus fugiat beatae mollitia magni, repellendus provident labore. Ipsum quisquam vitae molestias placeat doloribus deleniti veniam quae pariatur? Nam esse aperiam nihil ipsum molestias, distinctio nostrum laudantium, illum quos dicta ea asperiores. Ipsa magnam sit libero earum quos distinctio ut veniam. Cum enim harum aspernatur sapiente aliquam facere.',
-                ['tak', 'nie'],
-                'tak',
-                new Date(),
-                'F'
-            )
-        );
+        const options = { params: new HttpParams().set('student', this.getAuthentication().username) };
+        return this.http.get<Questionnaire>(this.studentQuestionnaireUrl + id, options);
     }
 
     saveQuestionnaire(val: QuestionnaireAnswer): void {
-        console.log(val, 'Save answer!');
+        this.http.post<QuestionnaireAnswer>(this.studentQuestionnaireUrl, val, this.httpOptions).subscribe();
     }
 
     getSubjects(filter: string): Observable<Array<SemesterData>> {

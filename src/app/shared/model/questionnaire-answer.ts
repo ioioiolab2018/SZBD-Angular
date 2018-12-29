@@ -1,9 +1,14 @@
 export class QuestionnaireAnswer {
     constructor(
-        public id: number,
-        public questionnaire: number,
+        public questionnaireAnswerIdentity: QuestionnaireAnswerIdentity,
         public answer: string,
-        public answerDate: Date,
-        public person: string = null
-    ) {}
+        public date: Date
+    ) { }
+}
+
+export class QuestionnaireAnswerIdentity {
+    constructor(
+        public questionnaireId: number,
+        public personId: string
+    ) { }
 }

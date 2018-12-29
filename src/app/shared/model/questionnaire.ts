@@ -1,10 +1,10 @@
 export class Questionnaire {
     constructor(
-        public id?: number,
-        public questionnaire?: number,
+        public questionnaireId?: number,
+        public personId?: string,
         public name?: string,
         public content?: string,
-        public options?: any,
+        public options?: string[],
         public answer?: string,
         public date?: Date,
         public available?: string
