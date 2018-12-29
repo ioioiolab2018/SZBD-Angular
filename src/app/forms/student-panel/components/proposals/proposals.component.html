@@ -14,7 +14,7 @@
             <h4>Podpis</h4>
         </section>
     </article>
-    <article>
+    <article *ngIf="proposal.answerDate">
         <header>
             <h2>odpowiedź</h2>
             <h3>Data odpowiedzi: <span>{{proposal.answerDate | date:'d.M.yyyy'}}</span></h3>

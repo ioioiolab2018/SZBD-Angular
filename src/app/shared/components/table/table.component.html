@@ -9,7 +9,7 @@
             <td>{{row.column1}}</td>
             <td>{{row.column2}}</td>
             <td>{{row.column3}}</td>
-            <td *ngIf="row.column4">{{row.column4}}</td>
+            <td *ngIf="row.column4 !== null">{{row.column4}}</td>
         </tr>
     </tbody>
     <tfoot *ngIf="withFooter">

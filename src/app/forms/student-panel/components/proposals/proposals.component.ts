@@ -32,6 +32,8 @@ export class ProposalsComponent {
     }
 
     getProposal(val: TableValue): void {
-        this.proposalService.getProposal(val.id);
+        if (val.id !== this.proposal.id) {
+            this.proposalService.getProposal(val.id);
+        }
     }
 }
