@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Authentication } from 'src/app/shared/model/authentication';
 
 @Injectable({
     providedIn: 'root'
@@ -16,19 +17,19 @@ export class AuthenticationService {
                 password
             })
             .pipe(
-                map(user => {
-                    if (user && user.token) {
+                map((authentication: Authentication) => {
+                    if (authentication && authentication.token) {
                         localStorage.setItem(
-                            'currentUser',
-                            JSON.stringify(user)
+                            'authentication',
+                            JSON.stringify(authentication)
                         );
                     }
-                    return user;
+                    return authentication;
                 })
             );
     }
 
     logout(): void {
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('authentication');
     }
 }

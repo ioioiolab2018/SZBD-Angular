@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/auth/services/authentication.service';
 import { first } from 'rxjs/operators';
+import { Authentication } from 'src/app/shared/model/authentication';
 
 @Component({
     selector: 'szbd-login-panel',
@@ -27,7 +28,7 @@ export class LoginPanelComponent implements OnInit {
         this.authenticationService.logout();
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
 
     login(): void {
         if (this.loginForm.invalid) {
@@ -42,11 +43,14 @@ export class LoginPanelComponent implements OnInit {
             )
             .pipe(first())
             .subscribe(
-                data => {
+                (data: Authentication) => {
                     this.loading = false;
-                    data['isEmployee']
-                        ? this.router.navigateByUrl('/employee')
-                        : this.router.navigateByUrl('/student');
+                    console.log(data);
+                    if (data) {
+                        data.role === 'STUDENT'
+                            ? this.router.navigateByUrl('/student')
+                            : this.router.navigateByUrl('/employee');
+                    }
                 },
                 error => {
                     this.error = error;

@@ -16,14 +16,14 @@ export class LoginGuardService implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): boolean {
-        JSON.parse(localStorage.getItem('currentUser'));
-        if (localStorage.getItem('currentUser')) {
-            if (JSON.parse(localStorage.getItem('currentUser')).isEmployee) {
-                this.router.navigate(['/employee'], {
+        if (localStorage.getItem('authentication')) {
+            if (JSON.parse(localStorage.getItem('authentication')).role === 'STUDENT') {
+                this.router.navigate(['/student'], {
                     queryParams: { returnUrl: state.url }
                 });
+                return false;
             }
-            this.router.navigate(['/student'], {
+            this.router.navigate(['/employee'], {
                 queryParams: { returnUrl: state.url }
             });
             return false;

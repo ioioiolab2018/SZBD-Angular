@@ -17,8 +17,8 @@ export class EmployeeAuthGuardService implements CanActivate {
         state: RouterStateSnapshot
     ): boolean {
         if (
-            localStorage.getItem('currentUser') &&
-            JSON.parse(localStorage.getItem('currentUser')).isEmployee
+            localStorage.getItem('authentication') &&
+            JSON.parse(localStorage.getItem('authentication')).role !== 'STUDENT'
         ) {
             return true;
         }
