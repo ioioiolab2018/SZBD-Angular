@@ -26,13 +26,13 @@
     <article>
         <szbd-heading heading="Informacje o studiach"></szbd-heading>
         <div>
-            <p>Indeks: <span *ngIf="information">{{information.index}}</span></p>
+            <p>Indeks: <span *ngIf="information">{{information.studentIndex}}</span></p>
             <p>Semestr: <span *ngIf="information">{{information.semester}}</span></p>
             <p>Wydział: <span *ngIf="information">{{information.faculty}}</span></p>
             <p>Kierunek: <span *ngIf="information">{{information.studyField}}</span></p>
-            <p>Rodzaj studiów: <span *ngIf="information">{{information.studyMode}}</span></p>
-            <p>Forma studiów: <span *ngIf="information">{{information.type}}</span></p>
-            <p>Status: <span *ngIf="information">{{information.status}}</span></p>
+            <p>Rodzaj studiów: <span *ngIf="information">{{information.studyMode === 'FULL_TIME' ? 'stacjonarne' : 'niestacjonarne'}}</span></p>
+            <p>Forma studiów: <span *ngIf="information">{{getStudyTypeInformation(information.type)}}</span></p>
+            <p>Status: <span *ngIf="information">{{information.status === 'STUDY' ? 'studiuje' : 'nie studiuje'}}</span></p>
             <p>Zdobyte punkty ECTS: <span *ngIf="information">{{information.ectsPoints}}</span></p>
             <p>Data rozpoczęcia studiów: <span *ngIf="information">{{information.startDate | date: 'dd.MM.yyyy'}}</span></p>
             <p>Data zakończenia studiów: <span *ngIf="information">{{information.endDate | date: 'dd.MM.yyyy'}}</span></p>

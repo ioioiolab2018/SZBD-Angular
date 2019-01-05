@@ -22,4 +22,15 @@ export class InformationComponent {
                 this.information = val;
             });
     }
+    getStudyTypeInformation(val: string): string {
+        if (val === 'FIRST_DEGREE') {
+            return 'pierwszego stopnia';
+        } else if (val === 'SECOND_DEGREE') {
+            return 'drugiego stopnia';
+        } else if (val === 'PHD') {
+            return 'doktoranckie';
+        } else {
+            return 'podyplomowe'
+        }
+    }
 }

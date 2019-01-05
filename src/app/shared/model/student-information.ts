@@ -19,7 +19,7 @@ export class StudentInformation {
         public address?: string,
         public contactAddress?: string,
         public temporaryAddress?: string,
-        public index?: string,
+        public studentIndex?: string,
         public semester?: string,
         public faculty?: string,
         public studyField?: string,
