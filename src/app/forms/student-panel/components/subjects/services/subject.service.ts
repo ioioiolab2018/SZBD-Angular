@@ -24,9 +24,9 @@ export class SubjectService {
 
     private initDataFilterOptions(): void {
         this.dataFilterOptionsObs.next([
-            new MenuOption('Otwarte', 'OPENED'),
+            new MenuOption('Zaliczone', 'T'),
             new MenuOption('Wszystkie', 'ALL'),
-            new MenuOption('Zamknięte', 'CLOSED')
+            new MenuOption('Niezaliczone', 'F')
         ]);
     }
 
@@ -35,7 +35,9 @@ export class SubjectService {
             .getSubjects(filter)
             .subscribe((val: SemesterData[]) => {
                 this.subjectsObs.next(val);
-                this.getSubject(val[0].data[0].id);
+                if (val.length && val[0].data.length) {
+                    this.getSubject(val[0].data[0].id);
+                }
             });
     }
 

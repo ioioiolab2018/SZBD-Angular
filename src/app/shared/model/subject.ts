@@ -1,10 +1,10 @@
 export class Subject {
     constructor(
         public id?: number,
+        public groupId?: number,
+        public lecturerId?: number,
         public name?: string,
         public description?: string,
-        public lecturer?: string,
-        public ectsValue?: number,
-        public semester?: number
-    ) {}
+        public ectsValue?: number
+    ) { }
 }
