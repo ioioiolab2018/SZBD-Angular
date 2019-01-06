@@ -23,6 +23,7 @@ export class HttpService {
     private studentProposalUrl = 'api/commons/proposal/';
     private studentSubjectsListUrl = 'api/commons/student-subjects/';
     private studentSubjectUrl = 'api/commons/subject/';
+    private studentSemestersListUrl = 'api/student/semesters/';
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -41,11 +42,7 @@ export class HttpService {
     }
 
     getSemesters(): Observable<Array<TableData>> {
-        // return this.http.get<Array<TableData>>('');
-        return new BehaviorSubject<Array<TableData>>([
-            new TableData(1, 'I', '20.02.2018', '4.8'),
-            new TableData(2, 'II', '28.06.2018', '4.67')
-        ]).asObservable();
+        return this.http.get<Array<TableData>>(this.studentSemestersListUrl + this.getAuthentication().username);
     }
 
     getGrades(id: number): Observable<Array<GradeInformation>> {

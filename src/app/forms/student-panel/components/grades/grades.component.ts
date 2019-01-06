@@ -25,8 +25,13 @@ export class GradesComponent {
             this.columns = val;
         });
         this.gradeService.getSemestersObs().subscribe((val: TableData[]) => {
-            this.data = val;
-            this.selectedSemester = val[val.length - 1].column1;
+            if (val) {
+                this.data = val;
+                if (val.length) {
+                    const temp: TableData = val[val.length - 1];
+                    this.getGrades(new TableValue(temp.id, temp.column1));
+                }
+            }
         });
         this.gradeService
             .getGradesObs()

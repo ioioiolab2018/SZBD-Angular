@@ -18,7 +18,9 @@ export class GradeService {
         this.initColumnNames();
         this.httpService.getSemesters().subscribe((val: TableData[]) => {
             this.semestersDataObs.next(val);
-            this.getGrades(val[val.length - 1].id);
+            if (val.length) {
+                this.getGrades(val[val.length - 1].id);
+            }
         });
     }
 
