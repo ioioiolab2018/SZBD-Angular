@@ -7,11 +7,13 @@ import { GradesComponent } from './components/grades/grades.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 import { QuestionnairesComponent } from './components/questionnaires/questionnaires.component';
 import { NewProposalComponent } from './components/new-proposal/new-proposal.component';
+import { AuthGuardService } from 'src/app/auth/guards/auth-guard.service';
 
 const loginRouting: Routes = [
     {
         path: 'student',
         component: StudentPanelComponent,
+        canActivate: [AuthGuardService],
         children: [
             {
                 path: '',

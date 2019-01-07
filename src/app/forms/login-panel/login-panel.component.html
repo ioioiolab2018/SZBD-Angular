@@ -8,17 +8,17 @@
                 <i class="material-icons md-120">school</i>
                 <h1>Formularz logowania</h1>
             </header>
-            <form action="">
-                <div class="input">
+            <form [formGroup]="loginForm" (submit)="login()">
+                <div class="input" [ngClass]="{'red': loginForm.get('username').invalid && loginForm.get('username').dirty}">
                     <i class="material-icons">person</i>
-                    <input type="text" placeholder="login">
+                    <input type="text" placeholder="login" formControlName="username">
                 </div>
-                <div class="input">
+                <div class="input" [ngClass]="{'red': loginForm.get('password').invalid && loginForm.get('password').dirty}">
                     <i class="material-icons">fingerprint</i>
-                    <input type="password" placeholder="hasło">
+                    <input type="password" placeholder="hasło" formControlName="password">
                 </div>
                 <div class="submit">
-                    <input type="submit" value="Zaloguj">
+                    <button type="submit" [disabled]="loading">Zaloguj</button>
                     <h2><a href="#">Zapomniałes hasła?</a></h2>
                 </div>
             </form>
