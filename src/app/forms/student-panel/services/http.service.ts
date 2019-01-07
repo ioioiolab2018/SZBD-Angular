@@ -24,6 +24,7 @@ export class HttpService {
     private studentSubjectsListUrl = 'api/commons/student-subjects/';
     private studentSubjectUrl = 'api/commons/subject/';
     private studentSemestersListUrl = 'api/student/semesters/';
+    private studentGradesListUrl = 'api/student/grades/';
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -46,11 +47,8 @@ export class HttpService {
     }
 
     getGrades(id: number): Observable<Array<GradeInformation>> {
-        return new BehaviorSubject<Array<GradeInformation>>([
-            new GradeInformation('Komunikacja człowiek komputer', 'wykład'),
-            new GradeInformation('Inżynieria Oprogramowania', 'wykład'),
-            new GradeInformation('Sztuczna inteligencja', 'laboratorium')
-        ]).asObservable();
+        const options = { params: new HttpParams().set('username', this.getAuthentication().username) };
+        return this.http.get<Array<GradeInformation>>(this.studentGradesListUrl + id, options);
     }
 
     getInformations(): Observable<StudentInformation> {

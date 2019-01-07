@@ -1,10 +1,9 @@
 export class GradeInformation {
     constructor(
-        public subject?: string,
-        public subjectType?: string,
+        public name?: string,
         public lecturer?: string,
-        public date?: Date,
-        public firstGrade?: number,
-        public secondGrade?: number
+        public passDate?: Date,
+        public firstValue?: number,
+        public secondValue?: number
     ) {}
 }
