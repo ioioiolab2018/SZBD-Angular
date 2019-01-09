@@ -5,10 +5,11 @@
 .grades {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     margin-top: 15px;
 
     szbd-grade-information {
         flex-basis: 32%;
+        flex-shrink: 1;
+        margin: 0 10px 15px;
     }
 }
