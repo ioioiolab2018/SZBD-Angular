@@ -32,23 +32,35 @@ export class HttpService {
         })
     };
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private http: HttpClient, private router: Router) {}
 
     private getAuthentication(): Authentication {
         return JSON.parse(localStorage.getItem('authentication'));
     }
 
     getStudentInformations(): Observable<StudentInformation> {
-        return this.http.get<StudentInformation>(this.studentInformationUrl + this.getAuthentication().username)
+        return this.http.get<StudentInformation>(
+            this.studentInformationUrl + this.getAuthentication().username
+        );
     }
 
     getSemesters(): Observable<Array<TableData>> {
-        return this.http.get<Array<TableData>>(this.studentSemestersListUrl + this.getAuthentication().username);
+        return this.http.get<Array<TableData>>(
+            this.studentSemestersListUrl + this.getAuthentication().username
+        );
     }
 
     getGrades(id: number): Observable<Array<GradeInformation>> {
-        const options = { params: new HttpParams().set('username', this.getAuthentication().username) };
-        return this.http.get<Array<GradeInformation>>(this.studentGradesListUrl + id, options);
+        const options = {
+            params: new HttpParams().set(
+                'username',
+                this.getAuthentication().username
+            )
+        };
+        return this.http.get<Array<GradeInformation>>(
+            this.studentGradesListUrl + id,
+            options
+        );
     }
 
     getInformations(): Observable<StudentInformation> {
@@ -58,7 +70,9 @@ export class HttpService {
     }
 
     getProposals(): Observable<Array<TableData>> {
-        return this.http.get<Array<TableData>>(this.studentProposalsListUrl + this.getAuthentication().username);
+        return this.http.get<Array<TableData>>(
+            this.studentProposalsListUrl + this.getAuthentication().username
+        );
     }
 
     getProposal(id: number): Observable<Proposal> {
@@ -67,26 +81,49 @@ export class HttpService {
 
     saveProposal(val: Proposal): void {
         val.personId = this.getAuthentication().username;
-        this.http.post<Proposal>(this.studentProposalUrl, val, this.httpOptions).subscribe(() => this.router.navigate(['/student/proposals']));
+        this.http
+            .post<Proposal>(this.studentProposalUrl, val, this.httpOptions)
+            .subscribe(() => this.router.navigate(['/student/proposals']));
     }
 
     getQuestionnaires(filter: string): Observable<Array<TableData>> {
         const options = { params: new HttpParams().set('filter', filter) };
-        return this.http.get<Array<TableData>>(this.studentQuestionnairesListUrl + this.getAuthentication().username, options);
+        return this.http.get<Array<TableData>>(
+            this.studentQuestionnairesListUrl +
+                this.getAuthentication().username,
+            options
+        );
     }
 
     getQuestionnaire(id: number): Observable<Questionnaire> {
-        const options = { params: new HttpParams().set('student', this.getAuthentication().username) };
-        return this.http.get<Questionnaire>(this.studentQuestionnaireUrl + id, options);
+        const options = {
+            params: new HttpParams().set(
+                'student',
+                this.getAuthentication().username
+            )
+        };
+        return this.http.get<Questionnaire>(
+            this.studentQuestionnaireUrl + id,
+            options
+        );
     }
 
     saveQuestionnaire(val: QuestionnaireAnswer): void {
-        this.http.post<QuestionnaireAnswer>(this.studentQuestionnaireUrl, val, this.httpOptions).subscribe();
+        this.http
+            .post<QuestionnaireAnswer>(
+                this.studentQuestionnaireUrl,
+                val,
+                this.httpOptions
+            )
+            .subscribe();
     }
 
     getSubjects(filter: string): Observable<Array<SemesterData>> {
         const options = { params: new HttpParams().set('filter', filter) };
-        return this.http.get<Array<SemesterData>>(this.studentSubjectsListUrl + this.getAuthentication().username, options);
+        return this.http.get<Array<SemesterData>>(
+            this.studentSubjectsListUrl + this.getAuthentication().username,
+            options
+        );
     }
 
     getSubject(id: number): Observable<Subject> {

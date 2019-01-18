@@ -1,0 +1,43 @@
+$blue-50: rgba(65, 127, 251, 0.5);
+$blue-75: rgba(65, 127, 251, 0.75);
+$input-background: rgb(230, 230, 230);
+$input-text: rgb(178, 181, 183);
+$menu-option: rgba(255, 255, 255, 0.75);
+
+.wrapper {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+
+    .aside {
+        szbd-student-menu {
+            position: fixed;
+            display: block;
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 100vh;
+        }
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+
+        & > div:nth-of-type(1) {
+            display: flex;
+            justify-content: flex-end;
+            margin: 15px 30px 0;
+            color: $blue-50;
+        }
+
+        & > div:nth-last-of-type(1) {
+            padding: 0 50px;
+        }
+    }
+}
+
+.material-icons.md-80 {
+    font-size: 80px;
+}
