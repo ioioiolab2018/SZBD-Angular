@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpService } from '../../../services/http.service';
 import { TableData } from 'src/app/shared/model/table-data';
 import { Proposal } from 'src/app/shared/model/proposal';
+import { Filter } from 'src/app/shared/model/filter';
+import { HttpService } from '../../../services/http.service';
 
 @Injectable()
 export class ProposalService {
     private columnNamesObs = new BehaviorSubject<Array<string>>([]);
     private proposalsObs = new BehaviorSubject<Array<TableData>>([]);
-    private proposalObs = new BehaviorSubject<Proposal>(new Proposal());
+    private proposalObs = new BehaviorSubject<Proposal>(null);
 
     constructor(private httpService: HttpService) {
         this.init();
@@ -16,19 +17,13 @@ export class ProposalService {
 
     private init() {
         this.initColumnNames();
-        this.httpService.getProposals().subscribe((val: TableData[]) => {
-            this.proposalsObs.next(val);
-            if (val && val.length > 0) {
-                this.getProposal(val[0].id);
-            }
-        });
     }
 
     private initColumnNames(): void {
         this.columnNamesObs.next([
             'Temat',
+            'Wnioskodawca',
             'Data złożenia',
-            'Data odpowiedzi',
             'Odpowiedź'
         ]);
     }
@@ -49,5 +44,21 @@ export class ProposalService {
 
     getProposalObs(): Observable<Proposal> {
         return this.proposalObs.asObservable();
+    }
+
+    saveProposalAnswer(proposal: Proposal): void {
+        this.httpService.saveProposal(proposal);
+    }
+
+    filterProposalsSet(filter: Filter): void {
+        filter.secondFilter = (filter.secondFilter === 'Udzielono').toString();
+        this.httpService.getProposals(filter).subscribe(
+            (val: TableData[]) => {
+                this.proposalsObs.next(val);
+            },
+            (error: any) => {
+                console.log(error);
+            }
+        );
     }
 }

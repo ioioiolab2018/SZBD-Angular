@@ -1,3 +1,24 @@
-<p>
-  find works!
-</p>
+<div class="find">
+    <szbd-heading heading="Wyszukiwarka"></szbd-heading>
+    <section class="search">
+        <szbd-search
+            firstFilterName="Indeks:"
+            secondFilterName="Filtruj:"
+            [secondFilterOptions]="['Wykładowca', 'Student']"
+        ></szbd-search>
+    </section>
+    <section class="table">
+        <szbd-table
+            [columns]="columns"
+            [data]="data"
+            (select)="getInformation($event)"
+        ></szbd-table>
+    </section>
+    <div *ngIf="selectedSemester">
+        <szbd-heading
+            heading="Semestr"
+            [value]="selectedSemester"
+        ></szbd-heading>
+        <section class="edit"></section>
+    </div>
+</div>

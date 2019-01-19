@@ -45,9 +45,9 @@ export class QuestionnairesComponent {
                 if (val.length) {
                     this.questionnaireService
                         .getQuestionnaireObs()
-                        .subscribe((val: Questionnaire) => {
-                            if (val != null) {
-                                this.questionnaire = val;
+                        .subscribe((val2: Questionnaire) => {
+                            if (val2 != null) {
+                                this.questionnaire = val2;
                                 this.questionnaireForm.patchValue({
                                     answer: this.questionnaire.answer
                                 });

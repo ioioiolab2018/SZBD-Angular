@@ -1,3 +1,75 @@
-<p>
-  proposals works!
-</p>
+<szbd-heading heading="Wnioski"></szbd-heading>
+<section class="search">
+    <szbd-search
+        firstFilterName="Nazwisko:"
+        secondFilterName="Odpowiedź:"
+        [secondFilterOptions]="['Udzielono', 'Nie udzielono']" (filterEvent)="filterData($event)"
+    ></szbd-search>
+</section>
+<section class="table">
+    <szbd-table
+        [columns]="columns"
+        [data]="data"
+        (select)="getProposal($event)"
+    ></szbd-table>
+</section>
+<section class="proposal" *ngIf="proposal">
+    <article>
+        <header>
+            <h2>{{ proposal.topic }}</h2>
+            <h3>
+                Data złożenia:
+                <span>{{ proposal.submissionDate | date: 'd.M.yyyy' }}</span>
+            </h3>
+        </header>
+        <section>
+            <p>{{ proposal.content }}</p>
+            <h4>Podpis</h4>
+        </section>
+    </article>
+    <article>
+        <header>
+            <h2>odpowiedź</h2>
+            <h3>
+                Data odpowiedzi:
+                <span>{{ proposal.answerDate | date: 'd.M.yyyy' }}</span>
+            </h3>
+        </header>
+        <section class="proposalAnswer">
+            <form
+                [formGroup]="proposalAnswerForm"
+                (submit)="saveProposalAnswer()"
+            >
+                <textarea type="text" formControlName="answer"></textarea>
+                <div class="shortAnswer">
+                    <label>
+                        <input
+                            type="radio"
+                            name="shortAnswer"
+                            value="T"
+                            formControlName="shortAnswer"
+                        />
+                        <span class="circle"></span><span>Zatwierdź</span>
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="shortAnswer"
+                            value="F"
+                            formControlName="shortAnswer"
+                        />
+                        <span class="circle"></span><span>Odrzuć</span>
+                    </label>
+                </div>
+                <footer>
+                    <button
+                        type="submit"
+                        [disabled]="!proposalAnswerForm.valid"
+                    >
+                        Zapisz
+                    </button>
+                </footer>
+            </form>
+        </section>
+    </article>
+</section>

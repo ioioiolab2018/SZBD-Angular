@@ -1,0 +1,14 @@
+<div class="search" [formGroup]="searchForm">
+    <div class="filter">
+        <span>{{ firstFilterName }}</span>
+        <input type="text" formControlName="firstFilter" (keyup)="changeEvent()"/>
+    </div>
+    <div class="filter" *ngIf="secondFilterOptions">
+        <span>{{ secondFilterName }}</span>
+        <select formControlName="secondFilter" (change)="changeEvent()">
+            <option *ngFor="let option of secondFilterOptions" [value]="option">{{
+                option
+            }}</option>
+        </select>
+    </div>
+</div>
