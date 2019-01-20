@@ -1,0 +1,50 @@
+@import 'variables';
+
+.rate {
+    .table {
+        margin: 15px 0 25px;
+    }
+
+    > .search {
+        margin-top: 15px;
+    }
+
+    .edit {
+        margin-top: 15px;
+
+        footer {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            button {
+                margin-right: 50px;
+                width: 150px;
+                outline: none;
+                border: none;
+                box-shadow: none;
+                border-radius: 15px;
+                background-color: $blue-75;
+                color: rgb(255, 255, 255);
+                text-align: center;
+                font-family: Montserrat, Arial, Helvetica, sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 40px;
+                cursor: pointer;
+                transition: 0.3s linear;
+
+                &:hover {
+                    background-color: $blue-85;
+                }
+
+                &:disabled {
+                    background-color: $blue-50;
+                    cursor: default;
+                    &:hover {
+                        background-color: $blue-50;
+                    }
+                }
+            }
+        }
+    }
+}

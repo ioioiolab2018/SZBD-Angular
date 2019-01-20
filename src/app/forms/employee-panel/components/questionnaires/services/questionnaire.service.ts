@@ -38,7 +38,6 @@ export class QuestionnaireService {
                 .getQuestionnaires(filter.firstFilter)
                 .subscribe((val: TableData[]) => {
                     this.questionnairesObs.next(val);
-                    this.getQuestionnaire(val[0].id);
                 });
         }
     }

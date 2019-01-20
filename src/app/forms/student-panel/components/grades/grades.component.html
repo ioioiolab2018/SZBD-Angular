@@ -5,7 +5,7 @@
 <div *ngIf="selectedSemester">
     <szbd-heading heading="Semestr" [value]="selectedSemester"></szbd-heading>
     <section class="grades">
-        <ng-container *ngFor=" let grade of grades">
+        <ng-container *ngFor="let grade of grades">
             <szbd-grade-information [data]="grade"></szbd-grade-information>
         </ng-container>
     </section>

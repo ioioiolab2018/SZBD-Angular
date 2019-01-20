@@ -17,9 +17,9 @@ export class MenuService {
 
     private initMenuOptions(): void {
         this.menuOptions = [
-            new MenuOption('Szukaj', 'find'),
-            new MenuOption('Dodaj', 'create'),
-            new MenuOption('Oceń', 'rate'),
+            new MenuOption('Wyszukiwarka', 'find'),
+            new MenuOption('Nowy', 'create'),
+            new MenuOption('Oceny', 'rate'),
             new MenuOption('Ankiety', 'questionnaires'),
             new MenuOption('Wnioski', 'proposals')
         ];

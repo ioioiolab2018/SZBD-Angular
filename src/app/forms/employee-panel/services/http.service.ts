@@ -13,12 +13,17 @@ import { Authentication } from 'src/app/shared/model/authentication';
 import { Router } from '@angular/router';
 import { Filter } from 'src/app/shared/model/filter';
 import { QuestionnaireView } from 'src/app/shared/model/questionnaire-view';
+import { Student, ListItem } from 'src/app/shared/model/student';
+import { Grade } from 'src/app/shared/model/grade.model';
 
 @Injectable()
 export class HttpService {
+    private studentsListUrl = 'api/student/student-info/';
     private studentInformationUrl = 'api/student/student-info/';
-    private studentQuestionnairesListUrl = 'api/student/questionnaires/';
-    private studentQuestionnaireUrl = 'api/student/questionnaire/';
+    private subjectsListUrl = 'api/student/student-info/';
+    private gradeUrl = 'api/student/student-info/';
+    private questionnairesListUrl = 'api/student/questionnaires/';
+    private questionnaireUrl = 'api/student/questionnaire/';
     private proposalsListUrl = 'api/commons/proposals/';
     private proposalUrl = 'api/commons/proposal/';
     private studentSubjectsListUrl = 'api/commons/student-subjects/';
@@ -36,12 +41,6 @@ export class HttpService {
 
     private getAuthentication(): Authentication {
         return JSON.parse(localStorage.getItem('authentication'));
-    }
-
-    getStudentInformations(): Observable<StudentInformation> {
-        return this.http.get<StudentInformation>(
-            this.studentInformationUrl + this.getAuthentication().username
-        );
     }
 
     getSemesters(): Observable<Array<TableData>> {
@@ -69,6 +68,26 @@ export class HttpService {
         ).asObservable();
     }
 
+    // =========================  RATE  ========================= //
+    getStudents(filter: string): Observable<Array<TableData>> {
+        const options = { params: new HttpParams().set('index', filter) };
+        return this.http.get<Array<TableData>>(this.studentsListUrl, options);
+    }
+
+    getStudentInformations(index: number): Observable<Student> {
+        return this.http.get<Student>(this.studentInformationUrl + index);
+    }
+
+    getSubjectsList(groupId: number): Observable<Array<ListItem>> {
+        return this.http.get<Array<ListItem>>(this.subjectsListUrl + groupId);
+    }
+
+    saveGrade(grade: Grade): void {
+        this.http
+            .post<Proposal>(this.gradeUrl, grade, this.httpOptions)
+            .subscribe();
+    }
+
     // =========================  PROPOSALS  ========================= //
     getProposals(filter: Filter): Observable<Array<TableData>> {
         const options = {
@@ -84,29 +103,30 @@ export class HttpService {
     }
 
     saveProposal(val: Proposal): void {
-        val.personId = this.getAuthentication().username;
-        this.http.post<Proposal>(this.proposalUrl, val).subscribe();
+        this.http
+            .post<Proposal>(this.proposalUrl, val, this.httpOptions)
+            .subscribe();
     }
 
     // =========================  QUESTIONNAIRES  ========================= //
     getQuestionnaires(questionnaireName: string): Observable<Array<TableData>> {
-        const options = { params: new HttpParams().set('name', questionnaireName) };
+        const options = {
+            params: new HttpParams().set('name', questionnaireName)
+        };
         return this.http.get<Array<TableData>>(
-            this.studentQuestionnairesListUrl,
+            this.questionnairesListUrl,
             options
         );
     }
 
     getQuestionnaire(id: number): Observable<QuestionnaireView> {
-        return this.http.get<QuestionnaireView>(
-            this.studentQuestionnaireUrl + id
-        );
+        return this.http.get<QuestionnaireView>(this.questionnaireUrl + id);
     }
 
     saveQuestionnaire(val: QuestionnaireAnswer): void {
         this.http
             .post<QuestionnaireAnswer>(
-                this.studentQuestionnaireUrl,
+                this.questionnaireUrl,
                 val,
                 this.httpOptions
             )
