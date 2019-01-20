@@ -12,6 +12,7 @@ import { StudentInformation } from 'src/app/shared/model/student-information';
 import { Authentication } from 'src/app/shared/model/authentication';
 import { Router } from '@angular/router';
 import { Filter } from 'src/app/shared/model/filter';
+import { QuestionnaireView } from 'src/app/shared/model/questionnaire-view';
 
 @Injectable()
 export class HttpService {
@@ -88,25 +89,17 @@ export class HttpService {
     }
 
     // =========================  QUESTIONNAIRES  ========================= //
-    getQuestionnaires(filter: string): Observable<Array<TableData>> {
-        const options = { params: new HttpParams().set('filter', filter) };
+    getQuestionnaires(questionnaireName: string): Observable<Array<TableData>> {
+        const options = { params: new HttpParams().set('name', questionnaireName) };
         return this.http.get<Array<TableData>>(
-            this.studentQuestionnairesListUrl +
-                this.getAuthentication().username,
+            this.studentQuestionnairesListUrl,
             options
         );
     }
 
-    getQuestionnaire(id: number): Observable<Questionnaire> {
-        const options = {
-            params: new HttpParams().set(
-                'student',
-                this.getAuthentication().username
-            )
-        };
-        return this.http.get<Questionnaire>(
-            this.studentQuestionnaireUrl + id,
-            options
+    getQuestionnaire(id: number): Observable<QuestionnaireView> {
+        return this.http.get<QuestionnaireView>(
+            this.studentQuestionnaireUrl + id
         );
     }
 
@@ -120,6 +113,7 @@ export class HttpService {
             .subscribe();
     }
 
+    // =========================  COS  ========================= //
     getSubjects(filter: string): Observable<Array<SemesterData>> {
         const options = { params: new HttpParams().set('filter', filter) };
         return this.http.get<Array<SemesterData>>(

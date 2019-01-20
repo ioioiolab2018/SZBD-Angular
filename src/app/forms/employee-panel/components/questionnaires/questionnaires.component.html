@@ -1,3 +1,33 @@
-<p>
-  questionnaires works!
-</p>
+<szbd-heading heading="Ankiety"></szbd-heading>
+<section class="search">
+    <szbd-search
+        firstFilterName="Temat:"
+        (filterEvent)="getQuestionnaires($event)"
+    ></szbd-search>
+</section>
+<section class="table">
+    <szbd-table
+        [columns]="columns"
+        [data]="data"
+        (select)="getQuestionnaire($event)"
+    ></szbd-table>
+</section>
+<section class="questionnaire" *ngIf="questionnaire">
+    <article>
+        <header>
+            <h2>{{ questionnaire.name }}</h2>
+            <h3>
+                Data odpowiedzi:
+                <span>{{ questionnaire.date | date: 'd.M.yyyy' }}</span>
+            </h3>
+        </header>
+        <section>
+            <p>{{ questionnaire.content }}</p>
+            <div class="answers">
+                <div *ngFor="let option of questionnaire.options">
+                    <span>{{ option.name }}</span><span>{{ option.count }}</span>
+                </div>
+            </div>
+        </section>
+    </article>
+</section>
