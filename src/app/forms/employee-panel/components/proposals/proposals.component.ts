@@ -66,7 +66,7 @@ export class ProposalsComponent implements OnInit {
         proposal.shortAnswer = this.proposalAnswerForm.value.shortAnswer;
         proposal.answerDate = new Date();
         this.proposalService.saveProposalAnswer(proposal);
-        this.getProposal(new TableValue(proposal.id, ''));
+        this.proposal = null;
     }
 
     filterData(filter: Filter): void {

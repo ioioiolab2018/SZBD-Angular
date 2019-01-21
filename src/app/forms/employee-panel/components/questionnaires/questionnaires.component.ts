@@ -40,6 +40,7 @@ export class QuestionnairesComponent {
                     this.questionnaire = val2;
                 }
             });
+        this.getQuestionnaires(new Filter(''));
     }
 
     getQuestionnaire(val: TableValue): void {

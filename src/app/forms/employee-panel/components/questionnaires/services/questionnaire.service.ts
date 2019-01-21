@@ -11,7 +11,7 @@ export class QuestionnaireService {
     private questionnairesObs = new BehaviorSubject<Array<TableData>>([]);
     private questionnaireObs = new BehaviorSubject<QuestionnaireView>(null);
 
-    private oldFilter: Filter = new Filter('');
+    private oldFilter: Filter = new Filter(null);
 
     constructor(private httpService: HttpService) {
         this.init();
@@ -19,7 +19,6 @@ export class QuestionnaireService {
 
     private init() {
         this.initColumnNames();
-        this.getQuestionnaires(this.oldFilter);
     }
 
     private initColumnNames(): void {

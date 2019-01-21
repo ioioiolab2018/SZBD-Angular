@@ -91,7 +91,7 @@ export class HttpService {
     getProposals(filter: Filter): Observable<Array<TableData>> {
         const options = {
             params: new HttpParams()
-                .set('surname', filter.firstFilter)
+                .set('index', filter.firstFilter)
                 .set('answer', filter.secondFilter)
         };
         return this.http.get<Array<TableData>>(this.proposalsListUrl, options);
