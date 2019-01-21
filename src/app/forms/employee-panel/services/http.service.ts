@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { TableData } from 'src/app/shared/model/table-data';
 import { Proposal } from 'src/app/shared/model/proposal';
-import { Questionnaire } from 'src/app/shared/model/questionnaire';
 import { Subject } from 'src/app/shared/model/subject';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GradeInformation } from 'src/app/shared/model/grade-information';
@@ -22,8 +21,8 @@ export class HttpService {
     private studentInformationUrl = 'api/student/student-info/';
     private subjectsListUrl = 'api/student/student-info/';
     private gradeUrl = 'api/student/student-info/';
-    private questionnairesListUrl = 'api/student/questionnaires/';
-    private questionnaireUrl = 'api/student/questionnaire/';
+    private questionnairesListUrl = 'api/commons/questionnaires/';
+    private questionnaireUrl = 'api/employee/questionnaire/';
     private proposalsListUrl = 'api/commons/proposals/';
     private proposalUrl = 'api/commons/proposal/';
     private studentSubjectsListUrl = 'api/commons/student-subjects/';

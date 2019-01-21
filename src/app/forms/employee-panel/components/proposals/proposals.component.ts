@@ -55,7 +55,7 @@ export class ProposalsComponent implements OnInit {
     }
 
     getProposal(val: TableValue): void {
-        if (val.id !== this.proposal.id) {
+        if (!this.proposal || val.id !== this.proposal.id) {
             this.proposalService.getProposal(val.id);
         }
     }
