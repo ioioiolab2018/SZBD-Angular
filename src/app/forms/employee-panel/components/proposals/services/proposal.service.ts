@@ -32,6 +32,7 @@ export class ProposalService {
         this.httpService.getProposal(id).subscribe((val: Proposal) => {
             this.proposalObs.next(val);
         });
+
     }
 
     getColumnNamesObs(): Observable<Array<string>> {

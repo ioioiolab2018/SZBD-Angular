@@ -25,7 +25,7 @@
             <p>{{ questionnaire.content }}</p>
             <div class="answers">
                 <div *ngFor="let option of questionnaire.options">
-                    <span>{{ option.name }}</span><span>{{ option.count }}</span>
+                    <label>{{ option.name }}</label><span>{{ option.count }}</span>
                 </div>
             </div>
         </section>

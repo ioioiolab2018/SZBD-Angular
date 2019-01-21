@@ -30,14 +30,10 @@ export class ProposalsComponent implements OnInit {
             this.columns = val;
         });
         this.proposalService.getProposalsObs().subscribe((val: TableData[]) => {
+            console.log(val);
             this.data = val;
         });
-        this.proposalService.getProposalObs().subscribe((val: Proposal) => {
-            if (this.proposal) {
-                this.proposal = val;
-                this.patchFormValues();
-            }
-        });
+       
     }
 
     private initProposalAnswerForm(): void {
@@ -55,8 +51,14 @@ export class ProposalsComponent implements OnInit {
     }
 
     getProposal(val: TableValue): void {
-        if (val.id !== this.proposal.id) {
-            this.proposalService.getProposal(val.id);
+        if(!this.proposal){
+        this.proposalService.getProposalObs().subscribe((val: Proposal) => {
+            this.proposal = val;
+            this.patchFormValues();
+    });}
+        if (!this.proposal || val.id !== this.proposal.id) {
+          this.proposalService.getProposal(val.id);
+          console.log(this.proposal)
         }
     }
 
