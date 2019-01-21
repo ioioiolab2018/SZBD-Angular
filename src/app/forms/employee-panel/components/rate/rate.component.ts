@@ -6,6 +6,7 @@ import { Student, ListItem } from 'src/app/shared/model/student';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Grade } from 'src/app/shared/model/grade.model';
 import { GradeType } from 'src/app/shared/model/enum/grade-type';
+import { Filter } from 'src/app/shared/model/filter';
 
 @Component({
     selector: 'app-rate',
@@ -68,6 +69,10 @@ export class RateComponent implements OnInit {
         this.rateService
             .getSubjectsList()
             .subscribe((val: ListItem[]) => (this.subjects = val));
+    }
+
+    getStudents(filter: Filter): void {
+        this.rateService.getStudents(filter);
     }
 
     getStudent(val: TableValue): void {

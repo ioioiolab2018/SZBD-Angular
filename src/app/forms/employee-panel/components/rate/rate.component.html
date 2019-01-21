@@ -1,7 +1,10 @@
 <div class="rate">
     <szbd-heading heading="Oceny"></szbd-heading>
     <section class="search">
-        <szbd-search firstFilterName="Indeks:"></szbd-search>
+        <szbd-search
+            firstFilterName="Indeks:"
+            (filterEvent)="getStudents($event)"
+        ></szbd-search>
     </section>
     <section class="table">
         <szbd-table
