@@ -1,7 +1,7 @@
 <szbd-heading heading="Wnioski"></szbd-heading>
 <section class="search">
     <szbd-search
-        firstFilterName="Indeks:"
+        firstFilterName="Nazwisko:"
         secondFilterName="Odpowiedź:"
         [secondFilterOptions]="['Udzielono', 'Nie udzielono']" (filterEvent)="filterData($event)"
     ></szbd-search>
@@ -14,7 +14,6 @@
     ></szbd-table>
 </section>
 <section class="proposal" *ngIf="proposal">
-
     <article>
         <header>
             <h2>{{ proposal.topic }}</h2>

@@ -22,8 +22,8 @@ export class HttpService {
     private studentInformationUrl = 'api/student/student-info/';
     private subjectsListUrl = 'api/student/student-info/';
     private gradeUrl = 'api/student/student-info/';
-    private questionnairesListUrl = 'api/commons/questionnaires/';
-    private questionnaireUrl = 'api/employee/questionnaire/';
+    private questionnairesListUrl = 'api/student/questionnaires/';
+    private questionnaireUrl = 'api/student/questionnaire/';
     private proposalsListUrl = 'api/commons/proposals/';
     private proposalUrl = 'api/commons/proposal/';
     private studentSubjectsListUrl = 'api/commons/student-subjects/';

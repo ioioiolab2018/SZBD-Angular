@@ -10,7 +10,7 @@ import { Grade } from 'src/app/shared/model/grade.model';
 export class RateService {
     private studentColumnNames: string[] = [];
     private studentsObs = new BehaviorSubject<Array<TableData>>([]);
-    private studentObs = new BehaviorSubject<Student>(new Student(132319, 'Piotr', '', 'Stachowiak', [new ListItem(12, 'Semestr1'), new ListItem(12, 'Semestr1')]));
+    private studentObs = new BehaviorSubject<Student>(null);
     private subjectsObs = new BehaviorSubject<Array<ListItem>>([]);
 
     private oldFilter: Filter = new Filter('');
