@@ -33,7 +33,7 @@ export class ProposalsComponent implements OnInit {
             this.data = val;
         });
         this.proposalService.getProposalObs().subscribe((val: Proposal) => {
-            if (this.proposal) {
+            if (val) {
                 this.proposal = val;
                 this.patchFormValues();
             }
