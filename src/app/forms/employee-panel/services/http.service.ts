@@ -17,10 +17,10 @@ import { Grade } from 'src/app/shared/model/grade.model';
 
 @Injectable()
 export class HttpService {
-    private studentsListUrl = 'api/student/student-info/';
-    private studentInformationUrl = 'api/student/student-info/';
-    private subjectsListUrl = 'api/student/student-info/';
-    private gradeUrl = 'api/student/student-info/';
+    private studentsListUrl = 'api/employee/students';
+    private studentInformationUrl = 'api/employee/student-info/';
+    private subjectsListUrl = 'api/commons/subjects/';
+    private gradeUrl = 'api/commons/grade/';
     private questionnairesListUrl = 'api/commons/questionnaires/';
     private questionnaireUrl = 'api/employee/questionnaire/';
     private proposalsListUrl = 'api/commons/proposals/';

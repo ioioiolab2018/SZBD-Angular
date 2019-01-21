@@ -26,7 +26,7 @@
         <section class="edit">
             <div>
                 <span>Semestr: </span>
-                <select (change)="getSubjects($event)">
+                <select (change)="getSubjects($event.target.value)">
                     <option
                         *ngFor="let option of student.semesters"
                         [value]="option.ret"
