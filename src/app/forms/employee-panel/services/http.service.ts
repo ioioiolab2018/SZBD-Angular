@@ -36,6 +36,13 @@ export class HttpService {
     private studentSubjectUrl = 'api/commons/subject/';
     private studentSemestersListUrl = 'api/student/semesters/';
     private studentGradesListUrl = 'api/student/grades/';
+    private savePersonUrl = 'api/commons/new-person/';
+    private saveContactsUrl = 'api/commons/contact/';
+    private saveAddressesUrl = 'api/commons/address/';
+    private saveStudentUrl = 'api/commons/student/';
+    private saveLecturerUrl = 'api/commons/lecturer/';
+    private saveSemesterUrl ='api/commons/semester/';
+    private saveQuestionnaireUrl='api/commons/questionnaire/';
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -132,43 +139,43 @@ export class HttpService {
     // =========================  CREATE / UPDATE  ========================= //
     savePerson(val: Person): void {
         this.http
-            .post<string>(this.questionnaireUrl, val, this.httpOptions)
+            .post<string>(this.savePersonUrl, val, this.httpOptions)
             .subscribe();
     }
 
     saveStudent(val: Student): void {
         this.http
-            .post<Student>(this.questionnaireUrl, val, this.httpOptions)
+            .post<Student>(this.saveStudentUrl, val, this.httpOptions)
             .subscribe();
     }
 
     saveLecturer(val: Lecturer): void {
         this.http
-            .post<Lecturer>(this.questionnaireUrl, val, this.httpOptions)
+            .post<Lecturer>(this.saveLecturerUrl, val, this.httpOptions)
             .subscribe();
     }
 
     saveAddresses(val: Address[]): void {
         this.http
-            .post<Array<Address>>(this.questionnaireUrl, val, this.httpOptions)
+            .post<Array<Address>>(this.saveAddressesUrl, val, this.httpOptions)
             .subscribe();
     }
 
     saveContacts(val: Contact[]): void {
         this.http
-            .post<Array<Contact>>(this.questionnaireUrl, val, this.httpOptions)
+            .post<Array<Contact>>(this.saveContactsUrl, val, this.httpOptions)
             .subscribe();
     }
 
     saveStudentGroup(val: StudentGroup): void {
         this.http
-            .post<StudentGroup>(this.questionnaireUrl, val, this.httpOptions)
+            .post<StudentGroup>(this.saveSemesterUrl, val, this.httpOptions)
             .subscribe();
     }
 
     saveQuestionnaire(val: Questionnaire): void {
         this.http
-            .post<Questionnaire>(this.questionnaireUrl, val, this.httpOptions)
+            .post<Questionnaire>(this.saveQuestionnaireUrl, val, this.httpOptions)
             .subscribe();
     }
 
