@@ -16,6 +16,8 @@ import { Address } from 'src/app/shared/model/address.model';
 import { StudentGroup } from 'src/app/shared/model/student-group.model';
 import { Questionnaire } from 'src/app/shared/model/questionnaire.model';
 import { TableData } from 'src/app/shared/model/table-data';
+import { Filter } from 'src/app/shared/model/filter';
+import { TableValue } from 'src/app/shared/model/table_value';
 
 @Component({
     selector: 'app-create',
@@ -25,9 +27,12 @@ import { TableData } from 'src/app/shared/model/table-data';
 })
 export class CreateComponent implements OnInit {
     objectsTypesList: MenuOption[] = [];
-    objectType = '';
+    objectType = 'semester';
     form: FormGroup = new FormGroup({});
+    columns: string[] = [];
     tableData: TableData[] = [];
+    isEdited = false;
+    oldFilter: Filter = new Filter('');
 
     constructor(
         private createService: CreateService,
@@ -36,6 +41,7 @@ export class CreateComponent implements OnInit {
 
     ngOnInit() {
         this.initObjectsTypesList();
+        this.initColumnNames();
         this.createService
             .getTableDataObs()
             .subscribe((val: TableData[]) => (this.tableData = val));
@@ -45,29 +51,37 @@ export class CreateComponent implements OnInit {
         this.objectsTypesList = this.createService.getObjectsNamesList();
     }
 
+    private initColumnNames(): void {
+        this.createService
+            .getColumnNamesObs()
+            .subscribe((val: string[]) => (this.columns = val));
+    }
+
+    private getColumnNames(val: string): void {
+        this.createService.getColumnNames(val);
+    }
+
     prepareForm(objectType: string): void {
         switch (objectType) {
             case 'student':
                 this.form = this.newStudentGroup();
-                this.objectType = 'student';
                 break;
             case 'lecturer':
                 this.form = this.newLecturerGroup();
-                this.objectType = 'lecturer';
                 break;
             case 'semester':
                 this.form = this.newSemesterGroup();
-                this.objectType = 'semester';
                 break;
             case 'subject':
                 this.form = this.newSubjectGroup();
-                this.objectType = 'subject';
                 break;
             case 'questionnaire':
                 this.form = this.newQuestionnaireGroup();
-                this.objectType = 'questionnaire';
                 break;
         }
+        this.objectType = objectType;
+        this.getColumnNames(objectType);
+        this.filterTableData(this.oldFilter);
     }
 
     private newPersonGroup(): FormGroup {
@@ -362,6 +376,15 @@ export class CreateComponent implements OnInit {
                 this.createService.saveQuestionnaire(questionnaire);
                 break;
         }
-        this.objectType = '';
+        this.isEdited = false;
+    }
+
+    filterTableData(filter: Filter): void {
+        this.oldFilter = filter;
+        this.createService.filterTableDate(filter, this.objectType);
+    }
+
+    getSelectedOption(val: TableValue): void {
+        console.log(val);
     }
 }

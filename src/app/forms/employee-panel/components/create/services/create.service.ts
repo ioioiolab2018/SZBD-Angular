@@ -10,11 +10,13 @@ import { StudentGroup } from 'src/app/shared/model/student-group.model';
 import { Questionnaire } from 'src/app/shared/model/questionnaire.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TableData } from 'src/app/shared/model/table-data';
+import { Filter } from 'src/app/shared/model/filter';
 
 @Injectable()
 export class CreateService {
     private objectsTypesList: MenuOption[] = [];
     private tableDataObs = new BehaviorSubject<Array<TableData>>([]);
+    private columnNamesObs = new BehaviorSubject<Array<string>>([]);
 
     constructor(private httpService: HttpService) {
         this.init();
@@ -22,6 +24,7 @@ export class CreateService {
 
     private init() {
         this.initObjectsTypesList();
+        this.getColumnNames('semester');
     }
 
     private initObjectsTypesList(): void {
@@ -38,8 +41,61 @@ export class CreateService {
         return this.objectsTypesList;
     }
 
+    getColumnNamesObs(): Observable<Array<string>> {
+        return this.columnNamesObs.asObservable();
+    }
+
+    getColumnNames(val: string): void {
+        switch (val) {
+            case 'student':
+                this.columnNamesObs.next([
+                    'Indeks',
+                    'Imię',
+                    'Nazwisko',
+                    'Semestr'
+                ]);
+                break;
+            case 'lecturer':
+                this.columnNamesObs.next([
+                    'Indeks',
+                    'Imię',
+                    'Nazwisko',
+                    'Stopień naukowy'
+                ]);
+                break;
+            case 'semester':
+                this.columnNamesObs.next([
+                    'Wydział',
+                    'Kierunek',
+                    'Semestr',
+                    'Data rozpoczęcia'
+                ]);
+                break;
+            case 'subject':
+                this.columnNamesObs.next([
+                    'Nazwa',
+                    'Prowadzący',
+                    'Punkty ECTS',
+                    'Semestr'
+                ]);
+                break;
+            case 'questionnaire':
+                this.columnNamesObs.next([
+                    'Temat',
+                    'Data od',
+                    'Data do',
+                    'Edytowalna'
+                ]);
+                break;
+        }
+    }
+
     getTableDataObs(): Observable<Array<TableData>> {
         return this.tableDataObs.asObservable();
+    }
+
+    filterTableDate(filter: Filter, tableDataType: string): void {
+        console.log(filter.firstFilter, tableDataType);
     }
 
     private savePerson(person: Person): void {

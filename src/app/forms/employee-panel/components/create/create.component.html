@@ -5,7 +5,20 @@
         (select)="prepareForm($event)"
     ></szbd-select-button>
 </section>
-<section class="edit">
+<section class="search">
+    <szbd-search
+        firstFilterName="Indeks:"
+        (filterEvent)="filterTableData($event)"
+    ></szbd-search>
+</section>
+<section class="table">
+    <szbd-table
+        [columns]="columns"
+        [data]="tableData"
+        (select)="getSelectedOption($event)"
+    ></szbd-table>
+</section>
+<section class="edit" *ngIf="isEdited">
     <div [formGroup]="form">
         <section class="person" *ngIf="shouldDisplay('person')">
             <div formGroupName="person">

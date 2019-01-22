@@ -6,7 +6,6 @@ import { Subject } from 'src/app/shared/model/subject';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GradeInformation } from 'src/app/shared/model/grade-information';
 import { SemesterData } from 'src/app/shared/model/semester-data';
-import { QuestionnaireAnswer } from 'src/app/shared/model/questionnaire-answer';
 import { StudentInformation } from 'src/app/shared/model/student-information';
 import { Authentication } from 'src/app/shared/model/authentication';
 import { Router } from '@angular/router';
@@ -41,8 +40,8 @@ export class HttpService {
     private saveAddressesUrl = 'api/commons/address/';
     private saveStudentUrl = 'api/commons/student/';
     private saveLecturerUrl = 'api/commons/lecturer/';
-    private saveSemesterUrl ='api/commons/semester/';
-    private saveQuestionnaireUrl='api/commons/questionnaire/';
+    private saveSemesterUrl = 'api/commons/semester/';
+    private saveQuestionnaireUrl = 'api/commons/questionnaire/';
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -175,7 +174,11 @@ export class HttpService {
 
     saveQuestionnaire(val: Questionnaire): void {
         this.http
-            .post<Questionnaire>(this.saveQuestionnaireUrl, val, this.httpOptions)
+            .post<Questionnaire>(
+                this.saveQuestionnaireUrl,
+                val,
+                this.httpOptions
+            )
             .subscribe();
     }
 
