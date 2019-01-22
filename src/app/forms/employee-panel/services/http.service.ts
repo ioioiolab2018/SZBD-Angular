@@ -142,10 +142,18 @@ export class HttpService {
             .subscribe();
     }
 
+    getPerson(id: string): Observable<Person> {
+        return this.http.get<Person>(this.questionnaireUrl + id);
+    }
+
     saveStudent(val: Student): void {
         this.http
             .post<Student>(this.saveStudentUrl, val, this.httpOptions)
             .subscribe();
+    }
+
+    getStudent(id: string): Observable<Student> {
+        return this.http.get<Student>(this.questionnaireUrl + id);
     }
 
     saveLecturer(val: Lecturer): void {
@@ -154,16 +162,28 @@ export class HttpService {
             .subscribe();
     }
 
+    getLecturer(id: string): Observable<Lecturer> {
+        return this.http.get<Lecturer>(this.questionnaireUrl + id);
+    }
+
     saveAddresses(val: Address[]): void {
         this.http
             .post<Array<Address>>(this.saveAddressesUrl, val, this.httpOptions)
             .subscribe();
     }
 
+    getAddresses(id: string): Observable<Array<Address>> {
+        return this.http.get<Array<Address>>(this.questionnaireUrl + id);
+    }
+
     saveContacts(val: Contact[]): void {
         this.http
             .post<Array<Contact>>(this.saveContactsUrl, val, this.httpOptions)
             .subscribe();
+    }
+
+    getContacts(id: string): Observable<Array<Contact>> {
+        return this.http.get<Array<Contact>>(this.questionnaireUrl + id);
     }
 
     saveStudentGroup(val: StudentGroup): void {

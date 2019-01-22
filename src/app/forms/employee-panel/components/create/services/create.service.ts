@@ -17,6 +17,7 @@ export class CreateService {
     private objectsTypesList: MenuOption[] = [];
     private tableDataObs = new BehaviorSubject<Array<TableData>>([]);
     private columnNamesObs = new BehaviorSubject<Array<string>>([]);
+    private selectedRowValueObs = new BehaviorSubject<any>({ _type: '' });
 
     constructor(private httpService: HttpService) {
         this.init();
@@ -98,6 +99,10 @@ export class CreateService {
         console.log(filter.firstFilter, tableDataType);
     }
 
+    getSelectedRowValueObs(): Observable<any> {
+        return this.selectedRowValueObs.asObservable();
+    }
+
     private savePerson(person: Person): void {
         this.httpService.savePerson(person);
     }
@@ -140,5 +145,95 @@ export class CreateService {
 
     saveQuestionnaire(questionnaire: Questionnaire): void {
         this.httpService.saveQuestionnaire(questionnaire);
+    }
+
+    getStudentData(val: string): void {
+        const result = {
+            _type: 'student',
+            person: {},
+            address: {},
+            contact: {}
+        };
+        this.httpService.getPerson(val).subscribe((val2: Person) => {
+            result.person = val2;
+            this.httpService.getAddresses(val).subscribe((val3: Address[]) => {
+                result.address = val3;
+                this.httpService
+                    .getContacts(val)
+                    .subscribe((val4: Contact[]) => {
+                        result.contact = val4;
+                        this.selectedRowValueObs.next(result);
+                    });
+            });
+        });
+    }
+
+    getLecturerData(val: string): void {
+        const result = {
+            _type: 'lecturer',
+            person: {},
+            address: {},
+            contact: {},
+            academicDegree: '',
+            office: ''
+        };
+        this.httpService.getPerson(val).subscribe((val2: Person) => {
+            result.person = val2;
+            this.httpService.getLecturer(val).subscribe((val3: Lecturer) => {
+                result.academicDegree = val3.academicDegree;
+                result.office = val3.office;
+                this.httpService
+                    .getAddresses(val)
+                    .subscribe((val4: Address[]) => {
+                        result.address = val4;
+                        this.httpService
+                            .getContacts(val)
+                            .subscribe((val5: Contact[]) => {
+                                result.contact = val5;
+                                this.selectedRowValueObs.next(result);
+                            });
+                    });
+            });
+        });
+    }
+
+    getSemesterData(val: number): void {
+        const result = {
+            _type: 'semester',
+            faculty: '',
+            studyField: '',
+            studyMode: '',
+            type: '',
+            startDate: '',
+            endDate: ''
+        };
+        this.selectedRowValueObs.next(result);
+    }
+
+    getSubjectData(val: number): void {
+        const result = {
+            _type: 'subject',
+            faculty: '',
+            studyField: '',
+            studyMode: '',
+            type: '',
+            semester: '',
+            startDate: '',
+            endDate: ''
+        };
+        this.selectedRowValueObs.next(result);
+    }
+
+    getQuestionnaireData(val: number): void {
+        const result = {
+            _type: 'questionnaire',
+            name: '',
+            content: '',
+            answerOptions: [],
+            startDate: '',
+            endDate: '',
+            single: ''
+        };
+        this.selectedRowValueObs.next(result);
     }
 }

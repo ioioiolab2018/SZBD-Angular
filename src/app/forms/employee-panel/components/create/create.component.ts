@@ -45,6 +45,7 @@ export class CreateComponent implements OnInit {
         this.createService
             .getTableDataObs()
             .subscribe((val: TableData[]) => (this.tableData = val));
+        this.getSelectedRowValueObs();
     }
 
     private initObjectsTypesList(): void {
@@ -55,6 +56,38 @@ export class CreateComponent implements OnInit {
         this.createService
             .getColumnNamesObs()
             .subscribe((val: string[]) => (this.columns = val));
+    }
+
+    private getSelectedRowValueObs(): void {
+        this.createService.getSelectedRowValueObs().subscribe((val: any) => {
+            switch (val._type) {
+                case 'student':
+                    this.form.patchValue({
+                        person: val.person,
+                        address: val.address,
+                        contact: val.contact
+                    });
+                    break;
+                case 'lecturer':
+                    this.form.patchValue({
+                        person: val.person,
+                        address: val.address,
+                        contact: val.contact,
+                        academicDegree: val.academicDegree,
+                        office: val.office
+                    });
+                    break;
+                case 'semester':
+                    this.form = this.newSemesterGroup();
+                    break;
+                case 'subject':
+                    this.form = this.newSubjectGroup();
+                    break;
+                case 'questionnaire':
+                    this.form = this.newQuestionnaireGroup();
+                    break;
+            }
+        });
     }
 
     private getColumnNames(val: string): void {
@@ -385,6 +418,24 @@ export class CreateComponent implements OnInit {
     }
 
     getSelectedOption(val: TableValue): void {
+        const type = this.objectType;
+        switch (type) {
+            case 'student':
+                this.createService.getStudentData(val.id);
+                break;
+            case 'lecturer':
+                this.createService.getLecturerData(val.id);
+                break;
+            case 'semester':
+                this.createService.getSemesterData(val.id);
+                break;
+            case 'subject':
+                this.createService.getSubjectData(val.id);
+                break;
+            case 'questionnaire':
+                this.createService.getQuestionnaireData(val.id);
+                break;
+        }
         console.log(val);
     }
 }
