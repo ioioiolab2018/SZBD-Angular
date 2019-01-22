@@ -29,9 +29,9 @@ export class QuestionnaireService {
 
     private initDataFilterOptions(): void {
         this.dataFilterOptionsObs.next([
-            new MenuOption('Otwarte', 'OPENED'),
+            new MenuOption('Otwarte', 'T'),
             new MenuOption('Wszystkie', 'ALL'),
-            new MenuOption('Zamknięte', 'CLOSED')
+            new MenuOption('Zamknięte', 'F')
         ]);
     }
 

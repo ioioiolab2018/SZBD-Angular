@@ -1,0 +1,94 @@
+@import 'variables';
+
+.search {
+    margin-top: 15px;
+}
+
+.table {
+    margin: 15px 0 25px;
+    div:nth-of-type(1) {
+        margin-bottom: 15px;
+    }
+}
+
+.questionnaire {
+    font-family: Raleway, Montserrat, Arial, Helvetica, sans-serif;
+    color: $text;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-family: Montserrat, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        h2 {
+            font-size: 25px;
+            color: $blue-75;
+            font-weight: 600;
+            &::first-letter {
+                text-transform: uppercase;
+            }
+        }
+        h3 {
+            font-size: 20px;
+            color: $text;
+            font-weight: 400;
+            &::first-letter {
+                text-transform: uppercase;
+            }
+
+            span {
+                color: $blue-75;
+            }
+        }
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-weight: 400;
+        margin-bottom: 20px;
+        p {
+            margin: 15px;
+            font-size: 15px;
+        }
+        .answers {
+            width: 100%;
+            margin: 0 15px 15px;
+        }
+    }
+    footer {
+        display: flex;
+        justify-content: flex-end;
+        button {
+            margin-right: 50px;
+            width: 150px;
+            outline: none;
+            border: none;
+            box-shadow: none;
+            border-radius: 15px;
+            background-color: $blue-75;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            font-family: Montserrat, Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 40px;
+            cursor: pointer;
+            transition: 0.3s linear;
+
+            &:hover {
+                background-color: $blue-85;
+            }
+
+            &:disabled {
+                background-color: $blue-50;
+                cursor: default;
+                &:hover {
+                    background-color: $blue-50;
+                }
+            }
+        }
+    }
+}

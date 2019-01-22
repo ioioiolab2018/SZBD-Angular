@@ -5,7 +5,7 @@ import { TableValue } from 'src/app/shared/model/table_value';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MenuOption } from 'src/app/shared/model/menu-option';
 import { QuestionnaireService } from './services/questionnaire.service';
-import { QuestionnaireAnswer } from 'src/app/shared/model/questionnaire-answer';
+import { QuestionnaireAnswer, QuestionnaireAnswerIdentity } from 'src/app/shared/model/questionnaire-answer';
 
 @Component({
     selector: 'szbd-questionnaires',
@@ -42,14 +42,18 @@ export class QuestionnairesComponent {
             .getQuestionnairesObs()
             .subscribe((val: TableData[]) => {
                 this.data = val;
-            });
-        this.questionnaireService
-            .getQuestionnaireObs()
-            .subscribe((val: Questionnaire) => {
-                this.questionnaire = val;
-                this.questionnaireForm.patchValue({
-                    answer: this.questionnaire.answer
-                });
+                if (val.length) {
+                    this.questionnaireService
+                        .getQuestionnaireObs()
+                        .subscribe((val2: Questionnaire) => {
+                            if (val2 != null) {
+                                this.questionnaire = val2;
+                                this.questionnaireForm.patchValue({
+                                    answer: this.questionnaire.answer
+                                });
+                            }
+                        });
+                }
             });
     }
 
@@ -64,8 +68,9 @@ export class QuestionnairesComponent {
     saveQuestionnnaire(): void {
         this.questionnaireService.saveQuestionnaire(
             new QuestionnaireAnswer(
-                this.questionnaire.id,
-                this.questionnaire.questionnaire,
+                new QuestionnaireAnswerIdentity(
+                    this.questionnaire.questionnaireId,
+                    this.questionnaire.personId),
                 this.questionnaireForm.value.answer,
                 new Date()
             )

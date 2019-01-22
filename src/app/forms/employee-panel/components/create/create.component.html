@@ -1,0 +1,248 @@
+<szbd-heading heading="Nowy"></szbd-heading>
+<section class="select">
+    <szbd-select-button
+        [options]="objectsTypesList"
+        (select)="prepareForm($event)"
+    ></szbd-select-button>
+</section>
+<section class="search">
+    <szbd-search
+        firstFilterName="Indeks:"
+        (filterEvent)="filterTableData($event)"
+    ></szbd-search>
+</section>
+<section class="table">
+    <szbd-table
+        [columns]="columns"
+        [data]="tableData"
+        (select)="getSelectedOption($event)"
+    ></szbd-table>
+    <button type="submit" (click)="isEdited = true">Nowy</button>
+</section>
+<section class="edit" *ngIf="isEdited">
+    <div [formGroup]="form">
+        <section class="person" *ngIf="shouldDisplay('person')">
+            <div formGroupName="person">
+                <h2>Dane osobowe</h2>
+                <div>
+                    <span>PESEL </span
+                    ><input type="text" formControlName="pesel" />
+                </div>
+                <div>
+                    <span>Imię </span
+                    ><input type="text" formControlName="name" />
+                </div>
+                <div>
+                    <span>Drugie imię </span
+                    ><input type="text" formControlName="secondName" />
+                </div>
+                <div>
+                    <span>Nazwisko </span
+                    ><input type="text" formControlName="surname" />
+                </div>
+                <div>
+                    <span>Data urodzenia </span
+                    ><input type="text" formControlName="birthDate" />
+                    <span class="prompt"> (yyyy-mm-dd)</span>
+                </div>
+                <div>
+                    <span>Miejsce urodzenia </span
+                    ><input type="text" formControlName="birthPlace" />
+                </div>
+                <div>
+                    <span>Imię ojca </span
+                    ><input type="text" formControlName="fatherName" />
+                </div>
+                <div>
+                    <span>Imię matki </span
+                    ><input type="text" formControlName="motherName" />
+                </div>
+                <div>
+                    <span>Płeć </span
+                    ><select formControlName="sex">
+                        <option value="MALE">Mężczyzna</option>
+                        <option value="FEMALE">Kobieta</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Rola </span
+                    ><select formControlName="role">
+                        <option value="STUDENT">Student</option>
+                        <option value="LECTURER">Pracownik</option>
+                    </select>
+                </div>
+            </div>
+            <div class="lecturer" *ngIf="shouldDisplay('lecturer')">
+                <div>
+                    <span>Stopień naukowy </span
+                    ><select formControlName="academicDegree">
+                        <option value="INZ">inż</option>
+                        <option value="MGR">mgr</option>
+                        <option value="DR">dr</option>
+                        <option value="PROF">prof</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Pokój </span
+                    ><input type="text" formControlName="office" />
+                </div>
+            </div>
+            <div class="address" formArrayName="address">
+                <h2>
+                    Adresy: <button (click)="addAddress()">Dodaj adres</button>
+                </h2>
+                <div *ngFor="let address of addresses.controls; let i = index">
+                    <div [formGroupName]="i">
+                        <div>
+                            <span>Miasto </span
+                            ><input type="text" formControlName="town" />
+                        </div>
+                        <div>
+                            <span>Ulica </span
+                            ><input type="text" formControlName="street" />
+                        </div>
+                        <div>
+                            <span>Kod pocztowy </span
+                            ><input type="text" formControlName="zipCode" />
+                        </div>
+                        <div>
+                            <span>Numer domu </span
+                            ><input type="text" formControlName="houseNumber" />
+                        </div>
+                        <div>
+                            <span>Numer mieszkania </span
+                            ><input
+                                type="text"
+                                formControlName="apartmentNumber"
+                            />
+                        </div>
+                        <div>
+                            <span>Typ </span
+                            ><select formControlName="addressType">
+                                <option value="DEFAULT">Domyslny</option>
+                                <option value="CONTACT">Kontaktowy</option>
+                                <option value="TEMPORARY">Tymczasowy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact" formArrayName="contact">
+                <h2>
+                    Kontakty:
+                    <button (click)="addContact()">Dodaj kontakt</button>
+                </h2>
+                <div
+                    *ngFor="let contact of contacts.controls; let j = index"
+                    [formGroupName]="j"
+                >
+                    <div>
+                        <span>Typ kontaktu </span
+                        ><select formControlName="contactType">
+                            <option value="EMAIL">Email</option>
+                            <option value="PHONE">Telefon</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span>Email </span
+                        ><input type="text" formControlName="email" />
+                    </div>
+                    <div>
+                        <span>Telefon </span>
+                        <input type="text" formControlName="phone" />
+                    </div>
+                    <div>
+                        <span>Rodzaj </span
+                        ><select formControlName="type">
+                            <option value="PRIVATE">Prywatny</option>
+                            <option value="BUSINESS">Służbowy</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="semester" *ngIf="shouldDisplay('semester')">
+            <h2>Semestr</h2>
+            <div>
+                <span>Wydział </span
+                ><input type="text" formControlName="faculty" />
+            </div>
+            <div>
+                <span>Kierunek </span
+                ><input type="text" formControlName="studyField" />
+            </div>
+            <div>
+                <span>Typ studiów </span
+                ><select formControlName="studyMode">
+                    <option value="FULL_TIME">Stacjonarne</option>
+                    <option value="PART_TIME">Niestacjonarne</option>
+                </select>
+            </div>
+            <div>
+                <span>Stopień studiów </span
+                ><select formControlName="type">
+                    <option value="FIRST_DEGREE">Pierwszego stopnia</option>
+                    <option value="SECOND_DEGREE">Drugiego stopnia</option>
+                    <option value="PHD">Doktoranckie</option>
+                    <option value="POSTGRADUATE">Podyplomowe</option>
+                </select>
+            </div>
+            <div>
+                <span>Semestr </span
+                ><input type="text" formControlName="semester" />
+            </div>
+            <div>
+                <span>Data rozpoczęcia </span
+                ><input type="text" formControlName="startDate" />
+                <span class="prompt"> (yyyy-mm-dd)</span>
+            </div>
+            <div>
+                <span>Data zakończenia </span
+                ><input type="text" formControlName="endDate" />
+                <span class="prompt"> (yyyy-mm-dd)</span>
+            </div>
+        </section>
+        <section class="questionnaire" *ngIf="shouldDisplay('questionnaire')">
+            <h2>Ankieta</h2>
+            <div>
+                <span>Temat </span><input type="text" formControlName="name" />
+            </div>
+            <div>
+                <span>Tresć </span
+                ><input type="text" formControlName="content" />
+            </div>
+            <div formArrayName="answerOptions">
+                <span
+                    >Opcje
+                    <button (click)="addOption()">Dodaj opcję</button></span
+                >
+                <div *ngFor="let option of options.controls; let i = index">
+                    <span>{{ ' ' + (i + 1) + '. ' }}</span
+                    ><input type="text" [formControlName]="i" />
+                </div>
+            </div>
+            <div>
+                <span>Data rozpoczęcia </span
+                ><input type="text" formControlName="startDate" />
+                <span class="prompt"> (yyyy-mm-dd)</span>
+            </div>
+            <div>
+                <span>Data zakończenia </span
+                ><input type="text" formControlName="endDate" />
+                <span class="prompt"> (yyyy-mm-dd)</span>
+            </div>
+            <div>
+                <span>Typ ankiety ze względu na odp. </span
+                ><select formControlName="single">
+                    <option value="T">Edytowalna</option>
+                    <option value="F">Nieedytowalna</option>
+                </select>
+            </div>
+        </section>
+        <footer>
+            <button type="submit" [disabled]="!form.valid" (click)="save()">
+                Zapisz
+            </button>
+        </footer>
+    </div>
+</section>

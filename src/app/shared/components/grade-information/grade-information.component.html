@@ -1,11 +1,11 @@
 <article>
     <header>
-        <h2>{{data.subject}}</h2>
-        <h3>{{data.subjectType}}</h3>
+        <h2>{{data.name}}</h2>
+        <!-- <h3>{{data.subjectType}}</h3> -->
     </header>
     <section>
         <p>wykładowca:<span>{{data.lecturer}}</span></p>
-        <p>data wystawienia:<span>{{data.date}}</span></p>
-        <p>ocena:<span>{{data.firstGrade + data.secondGrade ? "/" + data.secondGrade : ""}}</span></p>
+        <p>data wystawienia:<span>{{data.passDate | date: 'dd.MM.yyyy'}}</span></p>
+        <p>ocena:<span>{{ '' + data.firstValue + (data.secondValue ? "/" + data.secondValue : "")}}</span></p>
     </section>
 </article>

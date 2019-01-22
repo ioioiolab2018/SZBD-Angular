@@ -19,12 +19,18 @@ export class NewProposalComponent {
     }
 
     sendProposal(): void {
+        const date = new Date();
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        date.setMilliseconds(0);
         this.proposalService.saveProposal(
             new Proposal(
                 null,
+                null,
                 this.proposalForm.value.topic,
                 this.proposalForm.value.content,
-                new Date()
+                date
             )
         );
     }

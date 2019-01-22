@@ -1,0 +1,15 @@
+.search {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: rgb(241, 241, 241);
+    border-radius: 10px;
+
+    .filter {
+        margin-right: 20px;
+
+        span {
+            margin-right: 5px;
+        }
+    }
+}

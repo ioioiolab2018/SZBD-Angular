@@ -1,3 +1,3 @@
 export class TableValue {
-    constructor(public id: number, public column: string) {}
+    constructor(public id: any, public column: string) {}
 }

@@ -1,0 +1,78 @@
+<div class="rate">
+    <szbd-heading heading="Oceny"></szbd-heading>
+    <section class="search">
+        <szbd-search
+            firstFilterName="Indeks:"
+            (filterEvent)="getStudents($event)"
+        ></szbd-search>
+    </section>
+    <section class="table">
+        <szbd-table
+            [columns]="columns"
+            [data]="data"
+            (select)="getStudent($event)"
+        ></szbd-table>
+    </section>
+    <div *ngIf="student">
+        <szbd-heading
+            heading="Student"
+            [value]="
+                student.firstName +
+                (student.secondName ? ' ' + student.secondName : '') +
+                ' ' +
+                student.surname
+            "
+        ></szbd-heading>
+        <section class="edit">
+            <div>
+                <span>Semestr: </span>
+                <select (change)="getSubjects($event.target.value)">
+                    <option
+                        *ngFor="let option of student.semesters"
+                        [value]="option.ret"
+                        >{{ option.dsp }}</option
+                    >
+                </select>
+            </div>
+            <form
+                [formGroup]="rateForm"
+                (submit)="saveGrade()"
+                *ngIf="semester"
+            >
+                <div>
+                    <span>Przedmiot: </span>
+                    <select formControlName="subject">
+                        <option
+                            *ngFor="let option of subjects"
+                            [value]="option.ret"
+                            >{{ option.dsp }}</option
+                        >
+                    </select>
+                </div>
+                <div>
+                    <span>Ocena: </span>
+                    <select formControlName="value">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="3.5">3.5</option>
+                        <option value="4">4</option>
+                        <option value="4.5">4.5</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Typ oceny: </span>
+                    <select formControlName="type">
+                        <option value="FIRST">Pierwsza</option>
+                        <option value="SECOND">Druga</option>
+                    </select>
+                </div>
+                <footer>
+                    <button type="submit" [disabled]="!rateForm.valid">
+                        Zapisz
+                    </button>
+                </footer>
+            </form>
+        </section>
+    </div>
+</div>

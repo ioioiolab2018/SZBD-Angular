@@ -18,7 +18,9 @@ export class ProposalService {
         this.initColumnNames();
         this.httpService.getProposals().subscribe((val: TableData[]) => {
             this.proposalsObs.next(val);
-            this.getProposal(val[0].id);
+            if (val && val.length > 0) {
+                this.getProposal(val[0].id);
+            }
         });
     }
 
