@@ -17,6 +17,7 @@
         [data]="tableData"
         (select)="getSelectedOption($event)"
     ></szbd-table>
+    <button type="submit" (click)="isEdited = true">Nowy</button>
 </section>
 <section class="edit" *ngIf="isEdited">
     <div [formGroup]="form">

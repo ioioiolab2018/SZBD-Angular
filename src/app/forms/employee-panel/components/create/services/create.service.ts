@@ -11,6 +11,7 @@ import { Questionnaire } from 'src/app/shared/model/questionnaire.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TableData } from 'src/app/shared/model/table-data';
 import { Filter } from 'src/app/shared/model/filter';
+import { TableValue } from 'src/app/shared/model/table_value';
 
 @Injectable()
 export class CreateService {
@@ -96,7 +97,23 @@ export class CreateService {
     }
 
     filterTableDate(filter: Filter, tableDataType: string): void {
-        console.log(filter.firstFilter, tableDataType);
+        switch (tableDataType) {
+            case 'student':
+                this.httpService
+                    .getStudents(filter.firstFilter)
+                    .subscribe((val: TableData[]) => {
+                        this.tableDataObs.next(val);
+                    });
+                break;
+            case 'lecturer':
+                break;
+            case 'semester':
+                break;
+            case 'subject':
+                break;
+            case 'questionnaire':
+                break;
+        }
     }
 
     getSelectedRowValueObs(): Observable<any> {
@@ -156,15 +173,18 @@ export class CreateService {
         };
         this.httpService.getPerson(val).subscribe((val2: Person) => {
             result.person = val2;
-            this.httpService.getAddresses(val).subscribe((val3: Address[]) => {
-                result.address = val3;
-                this.httpService
-                    .getContacts(val)
-                    .subscribe((val4: Contact[]) => {
-                        result.contact = val4;
-                        this.selectedRowValueObs.next(result);
-                    });
-            });
+            this.httpService
+                .getAddresses(val2.pesel)
+                .subscribe((val3: Address[]) => {
+                    result.address = val3;
+                    this.httpService
+                        .getContacts(val2.pesel)
+                        .subscribe((val4: Contact[]) => {
+                            result.contact = val4;
+                            console.log(result);
+                            this.selectedRowValueObs.next(result);
+                        });
+                });
         });
     }
 
@@ -178,6 +198,7 @@ export class CreateService {
             office: ''
         };
         this.httpService.getPerson(val).subscribe((val2: Person) => {
+            val2.birthDate = new Date(val2.birthDate);
             result.person = val2;
             this.httpService.getLecturer(val).subscribe((val3: Lecturer) => {
                 result.academicDegree = val3.academicDegree;

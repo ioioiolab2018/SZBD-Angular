@@ -18,6 +18,7 @@ import { Questionnaire } from 'src/app/shared/model/questionnaire.model';
 import { TableData } from 'src/app/shared/model/table-data';
 import { Filter } from 'src/app/shared/model/filter';
 import { TableValue } from 'src/app/shared/model/table_value';
+import { ContactType } from 'src/app/shared/model/enum/contact-type';
 
 @Component({
     selector: 'app-create',
@@ -60,32 +61,86 @@ export class CreateComponent implements OnInit {
 
     private getSelectedRowValueObs(): void {
         this.createService.getSelectedRowValueObs().subscribe((val: any) => {
-            switch (val._type) {
-                case 'student':
-                    this.form.patchValue({
-                        person: val.person,
-                        address: val.address,
-                        contact: val.contact
-                    });
-                    break;
-                case 'lecturer':
-                    this.form.patchValue({
-                        person: val.person,
-                        address: val.address,
-                        contact: val.contact,
-                        academicDegree: val.academicDegree,
-                        office: val.office
-                    });
-                    break;
-                case 'semester':
-                    this.form = this.newSemesterGroup();
-                    break;
-                case 'subject':
-                    this.form = this.newSubjectGroup();
-                    break;
-                case 'questionnaire':
-                    this.form = this.newQuestionnaireGroup();
-                    break;
+            if (val._type) {
+                const month = new Date(val.person.birthDate).getMonth() + 1;
+                const birthDate =
+                    new Date(val.person.birthDate).getFullYear() +
+                    '-' +
+                    (month < 9 ? '0' + month : month) +
+                    '-' +
+                    new Date(val.person.birthDate).getDate();
+                switch (val._type) {
+                    case 'student':
+                        const form: FormGroup = <FormGroup>(
+                            this.form.get('person')
+                        );
+                        form.patchValue({
+                            pesel: val.person.pesel,
+                            name: val.person.name,
+                            secondName: val.person.secondName,
+                            surname: val.person.surname,
+                            birthDate: birthDate,
+                            birthPlace: val.person.birthPlace,
+                            fatherName: val.person.fatherName,
+                            motherName: val.person.motherName,
+                            sex: val.person.sex,
+                            role: val.person.role
+                        });
+                        this.form.setControl('address', new FormArray([]));
+                        let formArray: FormArray = this.form.get(
+                            'address'
+                        ) as FormArray;
+                        val.address.forEach((element: Address) => {
+                            formArray.push(
+                                this.newAdressGroup(
+                                    element.town,
+                                    element.street,
+                                    element.zipCode,
+                                    element.houseNumber,
+                                    element.apartmentNumber,
+                                    element.addressType
+                                )
+                            );
+                        });
+                        this.form.setControl('contact', new FormArray([]));
+                        formArray = this.form.get('contact') as FormArray;
+                        console.log(val.contact);
+                        val.contact.forEach((element: Contact) => {
+                            formArray.push(
+                                this.newContactGroup(
+                                    element.contactType,
+                                    element.contactType.toString() ===
+                                        ContactType.EMAIL.toString()
+                                        ? element.value
+                                        : '',
+                                    element.contactType === ContactType.PHONE
+                                        ? element.value
+                                        : '',
+                                    element.type
+                                )
+                            );
+                        });
+                        break;
+                    case 'lecturer':
+                        this.form.patchValue({
+                            person: val.person,
+                            address: val.address,
+                            contact: val.contact,
+                            academicDegree: val.academicDegree,
+                            office: val.office
+                        });
+                        break;
+                    case 'semester':
+                        this.form = this.newSemesterGroup();
+                        break;
+                    case 'subject':
+                        this.form = this.newSubjectGroup();
+                        break;
+                    case 'questionnaire':
+                        this.form = this.newQuestionnaireGroup();
+                        break;
+                }
+                this.isEdited = true;
             }
         });
     }
@@ -155,18 +210,25 @@ export class CreateComponent implements OnInit {
         });
     }
 
-    private newAdressGroup(): FormGroup {
+    private newAdressGroup(
+        town = '',
+        street = '',
+        zipCode = '',
+        houseNumber = null,
+        apartmentNumber = null,
+        addressType = 'DEFAULT'
+    ): FormGroup {
         return this.fb.group({
             town: [
-                '',
+                town,
                 [Validators.required, Validators.pattern('^[a-zA-Z]*$')]
             ],
             street: [
-                '',
+                street,
                 [Validators.required, Validators.pattern('^[a-zA-Z]*$')]
             ],
             zipCode: [
-                '',
+                zipCode,
                 [
                     Validators.required,
                     Validators.pattern('^[0-9]*$'),
@@ -175,20 +237,28 @@ export class CreateComponent implements OnInit {
                 ]
             ],
             houseNumber: [
-                '',
+                houseNumber,
                 [Validators.required, Validators.pattern('^[0-9a-z]*$')]
             ],
-            apartmentNumber: ['', [Validators.pattern('^[0-9]*$')]],
-            addressType: ['DEFAULT', [Validators.required]]
+            apartmentNumber: [
+                apartmentNumber,
+                [Validators.pattern('^[0-9]*$')]
+            ],
+            addressType: [addressType, [Validators.required]]
         });
     }
 
-    private newContactGroup(type: string): FormGroup {
+    private newContactGroup(
+        contactType: string,
+        email = '',
+        phone = '',
+        type = 'PRIVATE'
+    ): FormGroup {
         return this.fb.group({
-            contactType: [type.toUpperCase(), [Validators.required]],
-            email: ['', [Validators.required, Validators.email]],
+            contactType: [contactType.toUpperCase(), [Validators.required]],
+            email: [email, [Validators.required, Validators.email]],
             phone: [
-                '',
+                phone,
                 [
                     Validators.required,
                     Validators.pattern('^[0-9]*$'),
@@ -196,7 +266,7 @@ export class CreateComponent implements OnInit {
                     Validators.maxLength(9)
                 ]
             ],
-            type: ['PRIVATE', [Validators.required]]
+            type: [type, [Validators.required]]
         });
     }
 

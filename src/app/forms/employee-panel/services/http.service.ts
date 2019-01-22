@@ -36,8 +36,10 @@ export class HttpService {
     private studentSemestersListUrl = 'api/student/semesters/';
     private studentGradesListUrl = 'api/student/grades/';
     private savePersonUrl = 'api/commons/new-person/';
+    private personUrl = 'api/commons/person-by-index/';
     private saveContactsUrl = 'api/commons/contact/';
     private saveAddressesUrl = 'api/commons/address/';
+    private addressesUrl = 'api/commons/get-address/';
     private saveStudentUrl = 'api/commons/student/';
     private saveLecturerUrl = 'api/commons/lecturer/';
     private saveSemesterUrl = 'api/commons/semester/';
@@ -143,7 +145,7 @@ export class HttpService {
     }
 
     getPerson(id: string): Observable<Person> {
-        return this.http.get<Person>(this.questionnaireUrl + id);
+        return this.http.get<Person>(this.personUrl + id);
     }
 
     saveStudent(val: Student): void {
@@ -173,7 +175,10 @@ export class HttpService {
     }
 
     getAddresses(id: string): Observable<Array<Address>> {
-        return this.http.get<Array<Address>>(this.questionnaireUrl + id);
+        return this.http.get<Array<Address>>(
+            this.addressesUrl + id,
+            this.httpOptions
+        );
     }
 
     saveContacts(val: Contact[]): void {
@@ -183,7 +188,7 @@ export class HttpService {
     }
 
     getContacts(id: string): Observable<Array<Contact>> {
-        return this.http.get<Array<Contact>>(this.questionnaireUrl + id);
+        return this.http.get<Array<Contact>>(this.saveContactsUrl + id);
     }
 
     saveStudentGroup(val: StudentGroup): void {
