@@ -200,6 +200,10 @@ export class CreateComponent implements OnInit {
             ],
             studyMode: ['FULL_TIME', [Validators.required]],
             type: ['FIRST_DEGREE', [Validators.required]],
+            semester: [
+                1,
+                [Validators.required, Validators.pattern('^[0-9]*$')]
+            ],
             startDate: ['', Validators.pattern('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')],
             endDate: ['', Validators.pattern('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')]
         });
@@ -217,7 +221,6 @@ export class CreateComponent implements OnInit {
     }
 
     shouldDisplay(val: string): boolean {
-        console.log(val);
         if (this.objectType) {
             switch (val) {
                 case 'person':
@@ -340,6 +343,7 @@ export class CreateComponent implements OnInit {
                     this.form.value.studyField,
                     this.form.value.studyMode,
                     this.form.value.type,
+                    this.form.value.semester,
                     new Date(this.form.value.startDate),
                     new Date(this.form.value.endDate)
                 );

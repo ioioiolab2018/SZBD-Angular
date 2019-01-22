@@ -8,6 +8,7 @@ export class StudentGroup {
         public studyField: string,
         public studyMode: StudyMode,
         public type: StudyType,
+        public semster: number,
         public startDate: Date = new Date(),
         public endDate: Date = null
     ) {}
