@@ -8,10 +8,13 @@ import { Contact } from 'src/app/shared/model/contact.model';
 import { Lecturer } from 'src/app/shared/model/lecturer.model';
 import { StudentGroup } from 'src/app/shared/model/student-group.model';
 import { Questionnaire } from 'src/app/shared/model/questionnaire.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { TableData } from 'src/app/shared/model/table-data';
 
 @Injectable()
 export class CreateService {
     private objectsTypesList: MenuOption[] = [];
+    private tableDataObs = new BehaviorSubject<Array<TableData>>([]);
 
     constructor(private httpService: HttpService) {
         this.init();
@@ -33,6 +36,10 @@ export class CreateService {
 
     getObjectsNamesList(): Array<MenuOption> {
         return this.objectsTypesList;
+    }
+
+    getTableDataObs(): Observable<Array<TableData>> {
+        return this.tableDataObs.asObservable();
     }
 
     private savePerson(person: Person): void {

@@ -29,7 +29,7 @@
                 <div>
                     <span>Data urodzenia </span
                     ><input type="text" formControlName="birthDate" />
-                    <span class="prompt"> (dd.mm.yyyy)</span>
+                    <span class="prompt"> (yyyy-mm-dd)</span>
                 </div>
                 <div>
                     <span>Miejsce urodzenia </span
@@ -176,10 +176,12 @@
             <div>
                 <span>Data rozpoczęcia </span
                 ><input type="text" formControlName="startDate" />
+                <span class="prompt"> (yyyy-mm-dd)</span>
             </div>
             <div>
                 <span>Data zakończenia </span
                 ><input type="text" formControlName="endDate" />
+                <span class="prompt"> (yyyy-mm-dd)</span>
             </div>
         </section>
         <section class="questionnaire" *ngIf="shouldDisplay('questionnaire')">
@@ -204,10 +206,12 @@
             <div>
                 <span>Data rozpoczęcia </span
                 ><input type="text" formControlName="startDate" />
+                <span class="prompt"> (yyyy-mm-dd)</span>
             </div>
             <div>
                 <span>Data zakończenia </span
                 ><input type="text" formControlName="endDate" />
+                <span class="prompt"> (yyyy-mm-dd)</span>
             </div>
             <div>
                 <span>Typ ankiety ze względu na odp. </span
@@ -218,7 +222,9 @@
             </div>
         </section>
         <footer>
-            <button type="submit" [disabled]="!form.valid" (click)="save()">Zapisz</button>
+            <button type="submit" [disabled]="!form.valid" (click)="save()">
+                Zapisz
+            </button>
         </footer>
     </div>
 </section>

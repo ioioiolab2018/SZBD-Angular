@@ -15,6 +15,7 @@ import { Lecturer } from 'src/app/shared/model/lecturer.model';
 import { Address } from 'src/app/shared/model/address.model';
 import { StudentGroup } from 'src/app/shared/model/student-group.model';
 import { Questionnaire } from 'src/app/shared/model/questionnaire.model';
+import { TableData } from 'src/app/shared/model/table-data';
 
 @Component({
     selector: 'app-create',
@@ -26,6 +27,7 @@ export class CreateComponent implements OnInit {
     objectsTypesList: MenuOption[] = [];
     objectType = '';
     form: FormGroup = new FormGroup({});
+    tableData: TableData[] = [];
 
     constructor(
         private createService: CreateService,
@@ -34,6 +36,9 @@ export class CreateComponent implements OnInit {
 
     ngOnInit() {
         this.initObjectsTypesList();
+        this.createService
+            .getTableDataObs()
+            .subscribe((val: TableData[]) => (this.tableData = val));
     }
 
     private initObjectsTypesList(): void {
@@ -85,10 +90,7 @@ export class CreateComponent implements OnInit {
                 '',
                 [Validators.required, Validators.pattern('^[a-zA-Z]*$')]
             ],
-            birthDate: [
-                '',
-                Validators.pattern('^[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}$')
-            ],
+            birthDate: ['', Validators.pattern('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')],
             birthPlace: [
                 '',
                 [Validators.required, Validators.pattern('^[a-zA-Z]*$')]
@@ -127,12 +129,9 @@ export class CreateComponent implements OnInit {
             ],
             houseNumber: [
                 '',
-                [Validators.required, Validators.pattern('^[0-9]*$')]
+                [Validators.required, Validators.pattern('^[0-9a-z]*$')]
             ],
-            apartmentNumber: [
-                '',
-                [Validators.required, Validators.pattern('^[0-9]*$')]
-            ],
+            apartmentNumber: ['', [Validators.pattern('^[0-9]*$')]],
             addressType: ['DEFAULT', [Validators.required]]
         });
     }
@@ -184,14 +183,8 @@ export class CreateComponent implements OnInit {
             ],
             studyMode: ['FULL_TIME', [Validators.required]],
             type: ['FIRST_DEGREE', [Validators.required]],
-            startDate: [
-                '',
-                Validators.pattern('^[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}$')
-            ],
-            endDate: [
-                '',
-                Validators.pattern('^[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}$')
-            ]
+            startDate: ['', Validators.pattern('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')],
+            endDate: ['', Validators.pattern('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')]
         });
     }
 
@@ -207,14 +200,8 @@ export class CreateComponent implements OnInit {
             ],
             studyMode: ['FULL_TIME', [Validators.required]],
             type: ['FIRST_DEGREE', [Validators.required]],
-            startDate: [
-                '',
-                Validators.pattern('^[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}$')
-            ],
-            endDate: [
-                '',
-                Validators.pattern('^[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}$')
-            ]
+            startDate: ['', Validators.pattern('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')],
+            endDate: ['', Validators.pattern('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')]
         });
     }
 
@@ -223,14 +210,8 @@ export class CreateComponent implements OnInit {
             name: ['', [Validators.required]],
             content: ['', [Validators.required]],
             answerOptions: this.fb.array([new FormControl('')]),
-            startDate: [
-                '',
-                Validators.pattern('^[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}$')
-            ],
-            endDate: [
-                '',
-                Validators.pattern('^[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}$')
-            ],
+            startDate: ['', Validators.pattern('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')],
+            endDate: ['', Validators.pattern('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')],
             single: ['T', Validators.required]
         });
     }
@@ -299,7 +280,7 @@ export class CreateComponent implements OnInit {
                     this.form.value.person.name,
                     this.form.value.person.secondName,
                     this.form.value.person.surname,
-                    this.form.value.person.birthDate,
+                    new Date(this.form.value.person.birthDate),
                     this.form.value.person.birthPlace,
                     this.form.value.person.fatherName,
                     this.form.value.person.motherName,
@@ -359,8 +340,8 @@ export class CreateComponent implements OnInit {
                     this.form.value.studyField,
                     this.form.value.studyMode,
                     this.form.value.type,
-                    this.form.value.startDate,
-                    this.form.value.endDate
+                    new Date(this.form.value.startDate),
+                    new Date(this.form.value.endDate)
                 );
                 this.createService.saveStudentGroup(semester);
                 break;
@@ -370,8 +351,8 @@ export class CreateComponent implements OnInit {
                     this.form.value.name,
                     this.form.value.content,
                     this.form.value.answerOptions.join(';'),
-                    this.form.value.startDate,
-                    this.form.value.endDate,
+                    new Date(this.form.value.startDate),
+                    new Date(this.form.value.endDate),
                     this.form.value.single
                 );
                 this.createService.saveQuestionnaire(questionnaire);
