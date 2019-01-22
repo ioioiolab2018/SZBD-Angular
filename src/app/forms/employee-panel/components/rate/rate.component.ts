@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RateService } from './services/rate.service';
 import { TableData } from 'src/app/shared/model/table-data';
 import { TableValue } from 'src/app/shared/model/table_value';
-import { Student, ListItem } from 'src/app/shared/model/student';
+import { StudentView, ListItem } from 'src/app/shared/model/student';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Grade } from 'src/app/shared/model/grade.model';
 import { GradeType } from 'src/app/shared/model/enum/grade-type';
@@ -18,7 +18,7 @@ export class RateComponent implements OnInit {
     columns: string[] = [];
     data: TableData[] = [];
     subjects: ListItem[] = [];
-    student: Student = null;
+    student: StudentView = null;
     rateForm: FormGroup;
     semester: number;
 
@@ -55,7 +55,7 @@ export class RateComponent implements OnInit {
     }
 
     private getStudentObs(): void {
-        this.rateService.getStudentObs().subscribe((student: Student) => {
+        this.rateService.getStudentObs().subscribe((student: StudentView) => {
             if (student) {
                 this.student = student;
                 this.getSubjects(

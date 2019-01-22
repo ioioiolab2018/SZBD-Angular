@@ -1,4 +1,4 @@
-export class Student {
+export class StudentView {
     constructor(
         public index: number,
         public firstName: string,

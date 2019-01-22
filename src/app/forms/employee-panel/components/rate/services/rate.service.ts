@@ -3,14 +3,14 @@ import { Filter } from 'src/app/shared/model/filter';
 import { TableData } from 'src/app/shared/model/table-data';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpService } from '../../../services/http.service';
-import { Student, ListItem } from 'src/app/shared/model/student';
+import { StudentView, ListItem } from 'src/app/shared/model/student';
 import { Grade } from 'src/app/shared/model/grade.model';
 
 @Injectable()
 export class RateService {
     private studentColumnNames: string[] = [];
     private studentsObs = new BehaviorSubject<Array<TableData>>([]);
-    private studentObs = new BehaviorSubject<Student>(null);
+    private studentObs = new BehaviorSubject<StudentView>(null);
     private subjectsObs = new BehaviorSubject<Array<ListItem>>([]);
 
     private oldFilter: Filter = new Filter('');
@@ -46,7 +46,7 @@ export class RateService {
     getStudent(index: number): void {
         this.httpService
             .getStudentInformations(index)
-            .subscribe((val: Student) => this.studentObs.next(val));
+            .subscribe((val: StudentView) => this.studentObs.next(val));
     }
 
     getSubjects(groupId: number): void {
@@ -59,7 +59,7 @@ export class RateService {
         return this.studentsObs.asObservable();
     }
 
-    getStudentObs(): Observable<Student> {
+    getStudentObs(): Observable<StudentView> {
         return this.studentObs.asObservable();
     }
 

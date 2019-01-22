@@ -14,6 +14,7 @@ import { HeadingModule } from 'src/app/shared/components/heading/heading.module'
 import { TableModule } from 'src/app/shared/components/table/table.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from './services/http.service';
+import { SelectButtonModule } from 'src/app/shared/components/select-button/select-button.module';
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import { HttpService } from './services/http.service';
         MenuModule,
         ReactiveFormsModule,
         SearchModule,
+        SelectButtonModule,
         TableModule
     ],
     declarations: [

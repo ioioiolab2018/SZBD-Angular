@@ -12,8 +12,15 @@ import { Authentication } from 'src/app/shared/model/authentication';
 import { Router } from '@angular/router';
 import { Filter } from 'src/app/shared/model/filter';
 import { QuestionnaireView } from 'src/app/shared/model/questionnaire-view';
-import { Student, ListItem } from 'src/app/shared/model/student';
+import { StudentView, ListItem } from 'src/app/shared/model/student';
 import { Grade } from 'src/app/shared/model/grade.model';
+import { Questionnaire } from 'src/app/shared/model/questionnaire.model';
+import { Person } from 'src/app/shared/model/person.model';
+import { Student } from 'src/app/shared/model/student.model';
+import { Lecturer } from 'src/app/shared/model/lecturer.model';
+import { Address } from 'src/app/shared/model/address.model';
+import { Contact } from 'src/app/shared/model/contact.model';
+import { StudentGroup } from 'src/app/shared/model/student-group.model';
 
 @Injectable()
 export class HttpService {
@@ -73,8 +80,8 @@ export class HttpService {
         return this.http.get<Array<TableData>>(this.studentsListUrl, options);
     }
 
-    getStudentInformations(index: number): Observable<Student> {
-        return this.http.get<Student>(this.studentInformationUrl + index);
+    getStudentInformations(index: number): Observable<StudentView> {
+        return this.http.get<StudentView>(this.studentInformationUrl + index);
     }
 
     getSubjectsList(groupId: number): Observable<Array<ListItem>> {
@@ -122,13 +129,46 @@ export class HttpService {
         return this.http.get<QuestionnaireView>(this.questionnaireUrl + id);
     }
 
-    saveQuestionnaire(val: QuestionnaireAnswer): void {
+    // =========================  CREATE / UPDATE  ========================= //
+    savePerson(val: Person): void {
         this.http
-            .post<QuestionnaireAnswer>(
-                this.questionnaireUrl,
-                val,
-                this.httpOptions
-            )
+            .post<string>(this.questionnaireUrl, val, this.httpOptions)
+            .subscribe();
+    }
+
+    saveStudent(val: Student): void {
+        this.http
+            .post<Student>(this.questionnaireUrl, val, this.httpOptions)
+            .subscribe();
+    }
+
+    saveLecturer(val: Lecturer): void {
+        this.http
+            .post<Lecturer>(this.questionnaireUrl, val, this.httpOptions)
+            .subscribe();
+    }
+
+    saveAddresses(val: Address[]): void {
+        this.http
+            .post<Array<Address>>(this.questionnaireUrl, val, this.httpOptions)
+            .subscribe();
+    }
+
+    saveContacts(val: Contact[]): void {
+        this.http
+            .post<Array<Contact>>(this.questionnaireUrl, val, this.httpOptions)
+            .subscribe();
+    }
+
+    saveStudentGroup(val: StudentGroup): void {
+        this.http
+            .post<StudentGroup>(this.questionnaireUrl, val, this.httpOptions)
+            .subscribe();
+    }
+
+    saveQuestionnaire(val: Questionnaire): void {
+        this.http
+            .post<Questionnaire>(this.questionnaireUrl, val, this.httpOptions)
             .subscribe();
     }
 
